@@ -1,5 +1,5 @@
-// Generated from C:/Users/p3admin/Downloads/db2automator-master/db2automator-master/src/main/java/com/p3solutions/db2lookExecutor/parser\Db2Look.g4 by ANTLR 4.10.1
-package com.p3solutions.db2lookExecutor.parser.parser;
+// Generated from /Users/p3inm035/IdeaProjects/a360-migrator-service/src/main/java/com/p3solutions/db2lookExecutor/parser/Db2Look.g4 by ANTLR 4.10.1
+package com.p3solutions.db2lookExecutor.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -18,6 +18,56 @@ public interface Db2LookListener extends ParseTreeListener {
 	 */
 	void exitFileHandler(Db2LookParser.FileHandlerContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Db2LookParser#alterNickNameStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterNickNameStatement(Db2LookParser.AlterNickNameStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Db2LookParser#alterNickNameStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterNickNameStatement(Db2LookParser.AlterNickNameStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Db2LookParser#createNickStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateNickStatement(Db2LookParser.CreateNickStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Db2LookParser#createNickStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateNickStatement(Db2LookParser.CreateNickStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Db2LookParser#createUserMappingStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateUserMappingStatement(Db2LookParser.CreateUserMappingStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Db2LookParser#createUserMappingStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateUserMappingStatement(Db2LookParser.CreateUserMappingStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Db2LookParser#alterViewStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterViewStatement(Db2LookParser.AlterViewStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Db2LookParser#alterViewStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterViewStatement(Db2LookParser.AlterViewStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Db2LookParser#createServerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateServerStatement(Db2LookParser.CreateServerStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Db2LookParser#createServerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateServerStatement(Db2LookParser.CreateServerStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Db2LookParser#alterSequence}.
 	 * @param ctx the parse tree
 	 */
@@ -27,6 +77,16 @@ public interface Db2LookListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAlterSequence(Db2LookParser.AlterSequenceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Db2LookParser#createWrapperStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateWrapperStatement(Db2LookParser.CreateWrapperStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Db2LookParser#createWrapperStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateWrapperStatement(Db2LookParser.CreateWrapperStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Db2LookParser#tabSpace}.
 	 * @param ctx the parse tree

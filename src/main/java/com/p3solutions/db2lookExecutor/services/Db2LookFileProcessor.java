@@ -2,8 +2,8 @@ package com.p3solutions.db2lookExecutor.services;
 
 import com.p3solutions.db2lookExecutor.beans.DirectoryMeta;
 import com.p3solutions.db2lookExecutor.exception_handler.AnalyzerException;
-import com.p3solutions.db2lookExecutor.parser.parser.Db2LookLexer;
-import com.p3solutions.db2lookExecutor.parser.parser.Db2LookParser;
+import com.p3solutions.db2lookExecutor.parser.Db2LookLexer;
+import com.p3solutions.db2lookExecutor.parser.Db2LookParser;
 import com.p3solutions.db2lookExecutor.parser.syntax.SyntaxErrorListener;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -38,22 +38,18 @@ public class Db2LookFileProcessor {
             }
             query = sb.toString();
         }
-        return query;
+        return query.trim();
     }
     public InputStream getInputStream(String query) {
         return  new ByteArrayInputStream(query.getBytes(StandardCharsets.UTF_8));
     }
     public void processFile(File file, String host,  String port, String userName, String password, String outputDirectory) throws Exception {
-
+        System.out.println("processing " + file.getAbsolutePath());
         Db2LookLexer lexer = new Db2LookLexer(CharStreams.fromStream(getInputStream(readFileAsString(file.getAbsolutePath()))));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
         // Create a parser that feeds off the tokens buffer
         Db2LookParser parser = new Db2LookParser(tokens);
-//        if(!isCorrect(parser)){
-  //          throw new AnalyzerException("db2look parser error");
-    //    }
-//
         Db2LookParser.FileHandlerContext fileHandlerContext = parser.fileHandler();
         try {
             startProcessing(fileHandlerContext, host, port, userName, password, outputDirectory);
@@ -61,14 +57,22 @@ public class Db2LookFileProcessor {
             throw new RuntimeException(e);
         }
     }
+    public void processValidateFile(File file, String host,  String port, String userName, String password, String outputDirectory) throws Exception {
+        System.out.println("validating " + file.getAbsolutePath());
+        Db2LookLexer lexer = new Db2LookLexer(CharStreams.fromStream(getInputStream(readFileAsString(file.getAbsolutePath()))));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
 
+        // Create a parser that feeds off the tokens buffer
+        Db2LookParser parser = new Db2LookParser(tokens);
+        Db2LookParser.FileHandlerContext fileHandlerContext = parser.fileHandler();
+    }
     private void startProcessing(Db2LookParser.FileHandlerContext tree, String host, String port, String userName, String password, String outputDirectory) throws SQLException, ClassNotFoundException, AnalyzerException, IOException {
       String dbName = null;
       Map<String , String> failedQueryReasonsMap = new LinkedHashMap<>();
         Connection connection = null;
         for (int i = 0; i < tree.getChildCount(); i++) {
             ParseTree child = tree.getChild(i);
-            if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
+           if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
                 String[] split = child.getText().split(" ");
                dbName =  split[split.length-1]
                         .replaceAll("\"","")
@@ -173,14 +177,14 @@ public class Db2LookFileProcessor {
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
 
-            if(child instanceof Db2LookParser.CreateTableSpaceStatementContext){
-                String newQuery = alterTablespaceQuery(child.getText());
-                queryExecutor.executeQuery(newQuery, connection, failedQueryReasonsMap);
-            }
+//            if(child instanceof Db2LookParser.CreateTableSpaceStatementContext){
+//                String newQuery = alterTablespaceQuery(child.getText());
+//                queryExecutor.executeQuery(newQuery, connection, failedQueryReasonsMap);
+//            }
         }
-        fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
+//        fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
 
-        connection.close();
+//        connection.close();
     }
 
     private String alterTablespaceQuery(String query) {

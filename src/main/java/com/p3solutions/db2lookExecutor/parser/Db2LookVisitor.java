@@ -1,5 +1,5 @@
-// Generated from C:/Users/p3admin/Downloads/db2automator-master/db2automator-master/src/main/java/com/p3solutions/db2lookExecutor/parser\Db2Look.g4 by ANTLR 4.10.1
-package com.p3solutions.db2lookExecutor.parser.parser;
+// Generated from /Users/p3inm035/IdeaProjects/a360-migrator-service/src/main/java/com/p3solutions/db2lookExecutor/parser/Db2Look.g4 by ANTLR 4.10.1
+package com.p3solutions.db2lookExecutor.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -17,11 +17,47 @@ public interface Db2LookVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFileHandler(Db2LookParser.FileHandlerContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Db2LookParser#alterNickNameStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterNickNameStatement(Db2LookParser.AlterNickNameStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Db2LookParser#createNickStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateNickStatement(Db2LookParser.CreateNickStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Db2LookParser#createUserMappingStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateUserMappingStatement(Db2LookParser.CreateUserMappingStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Db2LookParser#alterViewStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterViewStatement(Db2LookParser.AlterViewStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Db2LookParser#createServerStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateServerStatement(Db2LookParser.CreateServerStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link Db2LookParser#alterSequence}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAlterSequence(Db2LookParser.AlterSequenceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Db2LookParser#createWrapperStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateWrapperStatement(Db2LookParser.CreateWrapperStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Db2LookParser#tabSpace}.
 	 * @param ctx the parse tree

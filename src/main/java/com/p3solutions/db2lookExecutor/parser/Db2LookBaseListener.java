@@ -1,5 +1,5 @@
-// Generated from C:/Users/p3admin/Downloads/db2automator-master/db2automator-master/src/main/java/com/p3solutions/db2lookExecutor/parser\Db2Look.g4 by ANTLR 4.10.1
-package com.p3solutions.db2lookExecutor.parser.parser;
+// Generated from /Users/p3inm035/IdeaProjects/a360-migrator-service/src/main/java/com/p3solutions/db2lookExecutor/parser/Db2Look.g4 by ANTLR 4.10.1
+package com.p3solutions.db2lookExecutor.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -28,6 +28,66 @@ public class Db2LookBaseListener implements Db2LookListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAlterNickNameStatement(Db2LookParser.AlterNickNameStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterNickNameStatement(Db2LookParser.AlterNickNameStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateNickStatement(Db2LookParser.CreateNickStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateNickStatement(Db2LookParser.CreateNickStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateUserMappingStatement(Db2LookParser.CreateUserMappingStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateUserMappingStatement(Db2LookParser.CreateUserMappingStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterViewStatement(Db2LookParser.AlterViewStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterViewStatement(Db2LookParser.AlterViewStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateServerStatement(Db2LookParser.CreateServerStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateServerStatement(Db2LookParser.CreateServerStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAlterSequence(Db2LookParser.AlterSequenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -35,6 +95,18 @@ public class Db2LookBaseListener implements Db2LookListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAlterSequence(Db2LookParser.AlterSequenceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateWrapperStatement(Db2LookParser.CreateWrapperStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateWrapperStatement(Db2LookParser.CreateWrapperStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

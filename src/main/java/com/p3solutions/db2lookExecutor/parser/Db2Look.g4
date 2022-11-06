@@ -46,6 +46,9 @@ CONSTRAINT:                            C O N S T R A I N T;
 AUDIT:                                 A U D I T;
 POLICY:                                P O L I C Y;
 ROLE:                                  R O L E;
+SERVER:                                 S E R V E R;
+MAPPING:                                M A P P I N G;
+NICKNAME:                               N I C K N A M E;
 fragment A:                                     [aA];
 fragment B:                                     [bB];
 fragment C:                                     [cC];
@@ -84,6 +87,7 @@ fragment SEVEN:                                 [7];
 fragment EIGHT:                                 [8];
 fragment NINE:                                  [9];
 
+TERMINATOR:                      ([;] [ ]? [\n]+) | (RT_BRACKET [ ]? [;] [\n]+) | (END [ ]? [;] [\n]+);
 //SYMBOL
 fragment UNDERSCORE:                            [_];
 
@@ -102,7 +106,7 @@ TAB3:                                   [\r];
 CURLY_BRACKET1:                            [{];
 CURLY_BRACKET2:                            [}];
 COMMENTS:                              '/*' .*? '*/'->skip;
-SINGLE_COMMENTS:                        ('--'  .*? [\n])->skip;
+SINGLE_COMMENTS:                        '--'  .*? [\n]->skip;
 
 HASH_SKIPPER:                            '#' .*? [\n]->skip;
 POINTER_SYMBOL:                           '=>';
@@ -120,6 +124,8 @@ PERCENTAGE:                             '%';
 PLUS:                                   '+';
 SUB:                                    '-';
 DOLLAR:                                 '$';
+DECLARE:                                D E C L A R E;
+ASTERIK:                            '&';
 EXCLAMATION:                            '!';
 WORD:                                   (LOWERCASE | UPPERCASE | SYMBOL9 |NUMS)+  ;
 DIGIT:                                  [0-9]+;
@@ -139,6 +145,7 @@ fileHandler:                             (tabSpace*  (tabSpace*   (connectStatem
                                           createTypeStatement|
                                           createSequenceStatement|
                                           alterSequence |
+                                          commentQuery|
                                           alterTableAddForeignKeyQuery|
                                           ((tabSpace* setStatement)* (alterTableAddCheckConstraintQuery))|
                                           userDefinedFunctions|
@@ -150,45 +157,56 @@ fileHandler:                             (tabSpace*  (tabSpace*   (connectStatem
                                           createAuditStatement|
                                           trustedContextStatement|
                                           connectResetQuery |
+                                          createIndexQuery|
+                                          alterViewStatement|
+                                          createServerStatement|
+                                          createViewStatement|
                                           createWrapperStatement|
+                                          createNickStatement|
+                                          createUserMappingStatement|
+                                          alterNickNameStatement|
                                          grantStatement
                                          ) tabSpace*)*
                                          tabSpace*
                                          commitStatement tabSpace*
                                          connectResetQuery tabSpace*
-                                         terminateStatement)  EOF;
-
-alterSequence:                          tabSpace* ALTER tabSpace+ SEQUENCE tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
-createWrapperStatement:                 tabSpace* CREATE tabSpace* WRAPPER ~(SEMI_COLON)+ SEMI_COLON;
+                                         terminateStatement) EOF;
+alterNickNameStatement:                 tabSpace* ALTER tabSpace+ NICKNAME ~(TERMINATOR)+ TERMINATOR;
+createNickStatement:                    tabSpace* CREATE tabSpace+ NICKNAME ~(TERMINATOR)+ TERMINATOR;
+createUserMappingStatement:             tabSpace* CREATE tabSpace+ USER tabSpace+ MAPPING ~(TERMINATOR)+ TERMINATOR;
+alterViewStatement:                     tabSpace* ALTER tabSpace+ VIEW ~(TERMINATOR)+ TERMINATOR;
+createServerStatement:                  tabSpace* CREATE tabSpace+ SERVER ~(TERMINATOR)+ TERMINATOR;
+alterSequence:                          tabSpace* ALTER tabSpace+ SEQUENCE tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
+createWrapperStatement:                 tabSpace* CREATE tabSpace+ WRAPPER ~(TERMINATOR)+ TERMINATOR;
 
 tabSpace:                            (SPACE|TAB|TAB1|TAB3);
 
 connectStatement:                      tabSpace* connectDbQuery;
-connectDbQuery:                        (CONNECT tabSpace+ TO tabSpace+ fullNameModel tabSpace* SEMI_COLON);
-connectResetQuery:                    tabSpace* (CONNECT tabSpace* RESET tabSpace* SEMI_COLON);
+connectDbQuery:                        (CONNECT tabSpace+ TO tabSpace+ fullNameModel tabSpace* TERMINATOR);
+connectResetQuery:                    tabSpace* (CONNECT tabSpace* RESET tabSpace* TERMINATOR);
 createDatabasePartitionGroupStatement: tabSpace* createDbPartitionGroupQuery;
-createDbPartitionGroupQuery:           CREATE tabSpace+ DATABASE tabSpace+ PARTITION tabSpace+ GROUP ~(SEMI_COLON)+ SEMI_COLON;
+createDbPartitionGroupQuery:           CREATE tabSpace+ DATABASE tabSpace+ PARTITION tabSpace+ GROUP ~(TERMINATOR)+ TERMINATOR;
 
 createBufferPoolStatement:             tabSpace* createBufferPoolQuery;
-createBufferPoolQuery:                 CREATE tabSpace+ BUFFERPOOL tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
+createBufferPoolQuery:                 CREATE tabSpace+ BUFFERPOOL tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
 
 mimicStorageGroupStatement:            tabSpace* mimicStorageGroupQuery;
-mimicStorageGroupQuery:                ALTER tabSpace+ STOGROUP ~(SEMI_COLON)* SEMI_COLON;
+mimicStorageGroupQuery:                ALTER tabSpace+ STOGROUP ~(TERMINATOR)* TERMINATOR;
 
 createTableSpaceStatement:             tabSpace*  createTableSpaceQuery;
-createTableSpaceQuery:                 CREATE  tabSpace* USER? tabSpace* (REGULAR|LARGE|TEMPORARY) tabSpace* ~(TABLESPACE)+  TABLESPACE ~(SEMI_COLON)+ SEMI_COLON;
+createTableSpaceQuery:                 CREATE  tabSpace* USER? tabSpace* (REGULAR|LARGE|TEMPORARY) tabSpace* ~(TABLESPACE)+  TABLESPACE ~(TERMINATOR)+ TERMINATOR;
 
 mimicTableSpaceStatement:              tabSpace* mimicTableSpaceQuery;
-mimicTableSpaceQuery:                  ALTER tabSpace+ TABLESPACE ~(SEMI_COLON)+ SEMI_COLON;
+mimicTableSpaceQuery:                  ALTER tabSpace+ TABLESPACE ~(TERMINATOR)+ TERMINATOR;
 
 createSchemaStatement:                 tabSpace* createSchemaQuery;
-createSchemaQuery:                     CREATE  tabSpace+ SCHEMA ~(SEMI_COLON)+ SEMI_COLON;
+createSchemaQuery:                     CREATE  tabSpace+ SCHEMA ~(TERMINATOR)+ TERMINATOR;
 
 createTypeStatement:                   (tabSpace* setStatement)* tabSpace* createTypeQuery;
-createTypeQuery:                       CREATE tabSpace+ TYPE tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
+createTypeQuery:                       CREATE tabSpace+ TYPE tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
 
 createSequenceStatement:               tabSpace* createSequenceQuery;
-createSequenceQuery:                   CREATE tabSpace+ SEQUENCE tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
+createSequenceQuery:                   CREATE tabSpace+ SEQUENCE tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
 tableSegment:                          tabSpace* (tabSpace* setStatement)* tabSpace* createTableQuery (tabSpace* (commentQuery|
                                                                                 alterTableAddPrimaryKeyQuery|
                                                                                 refreshTableQuery|
@@ -197,51 +215,51 @@ tableSegment:                          tabSpace* (tabSpace* setStatement)* tabSp
                                                                                 ((tabSpace* setStatement)* tabSpace*
                                                                                 createIndexQuery)) )*;
 
-commentQuery:                          COMMENT ~(SEMI_COLON)+ SEMI_COLON;
+commentQuery:                          tabSpace* COMMENT ~(TERMINATOR)+ TERMINATOR;
 
-createTableQuery:                      CREATE tabSpace+ (SUMMARY tabSpace+)? TABLE  ~(SEMI_COLON|ALTER)+ SEMI_COLON;
+createTableQuery:                      tabSpace* CREATE tabSpace+ (SUMMARY tabSpace+)? TABLE  ~(TERMINATOR)+ TERMINATOR;
 
-alterTableAddPrimaryKeyQuery:          ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace* CONSTRAINT tabSpace* fullNameModel)? tabSpace+  PRIMARY_KEY tabSpace* LT_BRACKET ~(RT_BRACKET)* RT_BRACKET  ~(SEMI_COLON)* SEMI_COLON;
-refreshTableQuery:                      REFRESH tabSpace+ TABLE ~(SEMI_COLON)+ SEMI_COLON;
-alterTableAddForeignKeyQuery:          tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace+ fullNameModel tabSpace* FOREIGN_KEY  tabSpace* ~(SEMI_COLON)+ SEMI_COLON;
+alterTableAddPrimaryKeyQuery:          tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace* CONSTRAINT tabSpace* fullNameModel)? tabSpace+  PRIMARY_KEY tabSpace* LT_BRACKET ~(RT_BRACKET)* RT_BRACKET  ~(TERMINATOR)+ TERMINATOR;
+refreshTableQuery:                     tabSpace*  REFRESH tabSpace+ TABLE ~(TERMINATOR)+ TERMINATOR;
+alterTableAddForeignKeyQuery:          tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace+ fullNameModel tabSpace* FOREIGN_KEY  tabSpace* ~(TERMINATOR)+ TERMINATOR;
 
-alterTableAddUniqueConstraintQuery:    ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace+ CONSTRAINT tabSpace* fullNameModel)? tabSpace* UNIQUE ~(SEMI_COLON)+ SEMI_COLON;
+alterTableAddUniqueConstraintQuery:    tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace+ CONSTRAINT tabSpace* fullNameModel)? tabSpace* UNIQUE ~(TERMINATOR)+ TERMINATOR;
 
-alterTableAddCheckConstraintQuery:     tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace* fullNameModel tabSpace*  CHECK ~(SEMI_COLON|CREATE)+ SEMI_COLON;
+alterTableAddCheckConstraintQuery:     tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace* fullNameModel tabSpace*  CHECK ~(TERMINATOR|CREATE)+ TERMINATOR;
 
-otherAlterQuery:                       tabSpace* ALTER  tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+  ~(PRIMARY_KEY|FOREIGN_KEY|CHECK|UNIQUE|SEMI_COLON)+ SEMI_COLON;
+otherAlterQuery:                       tabSpace* ALTER  tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+  ~(PRIMARY_KEY|FOREIGN_KEY|CHECK|UNIQUE|TERMINATOR)+ TERMINATOR;
 
-createIndexQuery:                      CREATE tabSpace+ (UNIQUE? tabSpace+ )? INDEX tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
+createIndexQuery:                     tabSpace* CREATE tabSpace+ (UNIQUE? tabSpace+ )? INDEX tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
 
-setStatement:                          tabSpace* SET  ~(SEMI_COLON)+ SEMI_COLON;
+setStatement:                          tabSpace* SET  ~(TERMINATOR)+ TERMINATOR;
 
 userDefinedFunctions:                  (tabSpace* setStatement)* tabSpace* createUDFQuery;
-createUDFQuery:                        CREATE tabSpace+ FUNCTION tabSpace+ fullNameModel tabSpace* LT_BRACKET ~(RT_BRACKET)* RT_BRACKET ~(SEMI_COLON)+ SEMI_COLON (tabSpace* END tabSpace* SEMI_COLON )?  tabSpace+;
+createUDFQuery:                        CREATE tabSpace+ FUNCTION tabSpace+ fullNameModel tabSpace*   (tabSpace* ~(TERMINATOR)+ tabSpace* TERMINATOR ) tabSpace*;
 
 createViewStatement:                   (tabSpace* setStatement)* tabSpace* createViewQuery;
-createViewQuery:                       CREATE tabSpace+ VIEW tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
+createViewQuery:                       CREATE tabSpace+ VIEW tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
 
 aliasStatement:                        tabSpace* aliasQuery;
-aliasQuery:                            CREATE tabSpace+ ALIAS tabSpace+ fullNameModel ~(SEMI_COLON)+ SEMI_COLON;
+aliasQuery:                            CREATE tabSpace+ ALIAS tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
 
 createStoredProcedureStatement:        (tabSpace* setStatement)* tabSpace* createProcedureQuery;
-createProcedureQuery:                  CREATE tabSpace+ PROCEDURE tabSpace+ fullNameModel tabSpace* ~(BEGIN)* BEGIN tabSpace* ~(END)+ tabSpace*  END tabSpace* SEMI_COLON;
+createProcedureQuery:                  CREATE tabSpace+ PROCEDURE tabSpace+ fullNameModel ~(TERMINATOR)+ tabSpace*  TERMINATOR;
 
 createTriggerStatement:                (tabSpace* setStatement)* tabSpace* createTriggerQuery;
-createTriggerQuery:                    CREATE tabSpace+ TRIGGER tabSpace+ fullNameModel .*?   (tabSpace* END SEMI_COLON);
+createTriggerQuery:                    CREATE tabSpace+ TRIGGER tabSpace+ fullNameModel .*?   (tabSpace* END TERMINATOR);
 
 grantStatement:                        tabSpace* grantQuery;
-grantQuery:                            GRANT ~(SEMI_COLON)+ SEMI_COLON;
+grantQuery:                            GRANT ~(TERMINATOR)+ TERMINATOR;
 
 
-terminateStatement:                    tabSpace* TERMINATE tabSpace*  SEMI_COLON tabSpace*;
+terminateStatement:                    tabSpace* TERMINATE  ~(EOF)+;
 space:                                 tabSpace;
-commitStatement:                       tabSpace* COMMIT ~(SEMI_COLON)+ SEMI_COLON;
-trustedContextStatement:               tabSpace* CREATE space* TRUSTED_CONTEXT  ~(SEMI_COLON)+ SEMI_COLON;
+commitStatement:                       tabSpace* COMMIT ~(TERMINATOR)+ TERMINATOR;
+trustedContextStatement:               tabSpace* CREATE space* TRUSTED_CONTEXT  ~(TERMINATOR)+ TERMINATOR;
 
-createAuditStatement:                   tabSpace* CREATE tabSpace* AUDIT tabSpace* POLICY ~(SEMI_COLON)+ SEMI_COLON;
+createAuditStatement:                   tabSpace* CREATE tabSpace* AUDIT tabSpace* POLICY ~(TERMINATOR)+ TERMINATOR;
 
-createRoleStatement:                    tabSpace* CREATE tabSpace* ROLE tabSpace*  ~(SEMI_COLON)+ SEMI_COLON;
+createRoleStatement:                    tabSpace* CREATE tabSpace* ROLE tabSpace*  ~(TERMINATOR)+ TERMINATOR;
 
 fullNameModel:                         ((databaseName space* DOT)? space* schemaName space* DOT)? space* tableName;
 databaseName:                          name;
