@@ -188,7 +188,7 @@ createDatabasePartitionGroupStatement: tabSpace* createDbPartitionGroupQuery;
 createDbPartitionGroupQuery:           CREATE tabSpace+ DATABASE tabSpace+ PARTITION tabSpace+ GROUP ~(TERMINATOR)+ TERMINATOR;
 
 createBufferPoolStatement:             tabSpace* createBufferPoolQuery;
-createBufferPoolQuery:                 CREATE tabSpace+ BUFFERPOOL tabSpace+ fullNameModel ~(TERMINATOR)+ TERMINATOR;
+createBufferPoolQuery:                 CREATE tabSpace+ BUFFERPOOL  ~(TERMINATOR)+ TERMINATOR;
 
 mimicStorageGroupStatement:            tabSpace* mimicStorageGroupQuery;
 mimicStorageGroupQuery:                ALTER tabSpace+ STOGROUP ~(TERMINATOR)* TERMINATOR;
