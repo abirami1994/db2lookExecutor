@@ -72,7 +72,7 @@ public class Db2LookFileProcessor {
         Connection connection = null;
         for (int i = 0; i < tree.getChildCount(); i++) {
             ParseTree child = tree.getChild(i);
-          /* if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
+          if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
                 String[] split = child.getText().split(" ");
                dbName =  split[split.length-1]
                         .replaceAll("\"","")
@@ -108,6 +108,12 @@ public class Db2LookFileProcessor {
                 }
             }
             else if(child instanceof Db2LookParser.CreateSequenceStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.AlterSequenceContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.CommentQueryContext){
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
             else if(child instanceof Db2LookParser.TableSegmentContext){
@@ -159,6 +165,27 @@ public class Db2LookFileProcessor {
                     }
                 }
             }
+            else if(child instanceof Db2LookParser.CreateIndexQueryContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.AlterViewStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.CreateServerStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.CreateWrapperStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.CreateNickStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.CreateUserMappingStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
+            else if(child instanceof Db2LookParser.AlterNickNameStatementContext){
+                queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
+            }
             else if(child instanceof Db2LookParser.CreateTriggerStatementContext){
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree triggerChild = child.getChild(i1);
@@ -176,15 +203,15 @@ public class Db2LookFileProcessor {
             else if(child instanceof Db2LookParser.GrantStatementContext){
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
-*/
+
             if(child instanceof Db2LookParser.CreateTableSpaceStatementContext){
                 String newQuery = alterTablespaceQuery(child.getText());
                 queryExecutor.executeQuery(newQuery, connection, failedQueryReasonsMap);
             }
         }
         fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
-//
-//        connection.close();
+
+        connection.close();
     }
 
     private String alterTablespaceQuery(String query) {
