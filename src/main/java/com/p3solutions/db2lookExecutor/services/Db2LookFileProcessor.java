@@ -72,7 +72,7 @@ public class Db2LookFileProcessor {
         Connection connection = null;
         for (int i = 0; i < tree.getChildCount(); i++) {
             ParseTree child = tree.getChild(i);
-           if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
+          /* if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
                 String[] split = child.getText().split(" ");
                dbName =  split[split.length-1]
                         .replaceAll("\"","")
@@ -176,14 +176,14 @@ public class Db2LookFileProcessor {
             else if(child instanceof Db2LookParser.GrantStatementContext){
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
-
-//            if(child instanceof Db2LookParser.CreateTableSpaceStatementContext){
-//                String newQuery = alterTablespaceQuery(child.getText());
-//                queryExecutor.executeQuery(newQuery, connection, failedQueryReasonsMap);
-//            }
+*/
+            if(child instanceof Db2LookParser.CreateTableSpaceStatementContext){
+                String newQuery = alterTablespaceQuery(child.getText());
+                queryExecutor.executeQuery(newQuery, connection, failedQueryReasonsMap);
+            }
         }
-//        fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
-
+        fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
+//
 //        connection.close();
     }
 
