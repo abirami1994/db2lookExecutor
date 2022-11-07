@@ -155,7 +155,7 @@ public class Db2LookFileProcessor {
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree udfChild = child.getChild(i1);
                     if(udfChild instanceof Db2LookParser.CreateUDFQueryContext){
-                        String query = child.getText();
+                        String query = udfChild.getText();
                         query = query.trim().endsWith(";") ? deleteSemicolon(query) : query;
                         queryExecutor.executeQuery(query, connection, failedQueryReasonsMap);
                     }
@@ -182,7 +182,7 @@ public class Db2LookFileProcessor {
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree procedureChild = child.getChild(i1);
                     if(procedureChild instanceof Db2LookParser.CreateProcedureQueryContext){
-                        String query = child.getText();
+                        String query = procedureChild.getText();
                         query = query.trim().endsWith(";") ? deleteSemicolon(query) : query;
                         queryExecutor.executeQuery(query, connection, failedQueryReasonsMap);
                     }
