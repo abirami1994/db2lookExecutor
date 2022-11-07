@@ -256,7 +256,7 @@ public class Db2LookFileProcessor {
             String locationPart = StringUtils.substringBetween(query, "(", ")");
             query = query.replace("(", "");
             query = query.replace(")", "");
-            query = query.replace(locationPart, " STORGROUP \"IBMSTOGROUP\" ");
+            query = query.replace(locationPart, " STOGROUP \"IBMSTOGROUP\" ");
             query = query.replace("MANAGED BY SYSTEM", "MANAGED BY AUTOMATIC STORAGE ");
         }
 //            if(locationPart.contains(",")){
