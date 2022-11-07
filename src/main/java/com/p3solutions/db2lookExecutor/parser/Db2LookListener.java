@@ -1,4 +1,4 @@
-// Generated from /Users/p3inm035/IdeaProjects/a360-migrator-service/src/main/java/com/p3solutions/db2lookExecutor/parser/Db2Look.g4 by ANTLR 4.10.1
+// Generated from /Users/p3inm035/IdeaProjects/a360-migrator-service/src/main/java/com/p3solutions/db2lookExecutor/parser/Db2Look.g4 by ANTLR 4.9.2
 package com.p3solutions.db2lookExecutor.parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 

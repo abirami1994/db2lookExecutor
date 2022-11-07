@@ -10,7 +10,7 @@ import java.util.Map;
 public class FileHandlers {
     public void writeLogs(Map<String, String> failedQueryReasonsMap, String outputDirectory, String dbName) throws IOException, AnalyzerException {
         try{
-            File myObj = new File(outputDirectory + "\\" + dbName + ".txt");
+            File myObj = new File(outputDirectory + "/" + dbName + ".txt");
         if (myObj.createNewFile()) {
             System.out.println("File created: " + myObj.getName());
         } else {
@@ -24,12 +24,12 @@ public class FileHandlers {
 
 
         try {
-            FileWriter myWriter = new FileWriter(outputDirectory + "\\" + dbName + ".txt");
+            FileWriter myWriter = new FileWriter(outputDirectory + "/" + dbName + ".txt");
             for (Map.Entry<String, String> stringEntry : failedQueryReasonsMap.entrySet()) {
                 myWriter.write("\n\n");
                 myWriter.write(stringEntry.getKey());
                 myWriter.write("\n");
-                myWriter.write(stringEntry.getValue());
+                myWriter.write("--" + stringEntry.getValue());
             }
             myWriter.close();
         } catch (IOException e) {

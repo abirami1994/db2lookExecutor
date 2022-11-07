@@ -2,11 +2,9 @@ package com.p3solutions.db2lookExecutor.services;
 
 import org.modelmapper.internal.util.Lists;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -21,14 +19,20 @@ public class QueryExecutor {
 
     public void executeQuery(String query, Connection connection, Map<String, String> failedQueryReasonMap) {
         if(Objects.nonNull(connection)){
-            try (Statement statement = connection.createStatement()) {
-                int i = statement.executeUpdate(query);
+            System.out.println("starting to execute");
+            System.out.println(query);
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                int i = statement.executeUpdate();
             } catch (Exception e) {
-                failedQueryReasonMap.put(
-                        query,
-                        "\"" + (Objects.nonNull(e.getMessage()) ? e.getMessage().replace("\n", " ").replace("\t", " ") : "Some exception occurred") + "\""
-                );
+                if(!(e.getMessage().contains("-601") || query.toUpperCase(Locale.ROOT).contains("GRANT"))) {
+                    failedQueryReasonMap.put(
+                            query,
+                            "\"" + (Objects.nonNull(e.getMessage()) ? e.getMessage().replace("\n", " ").replace("\t", " ") : "Some exception occurred") + "\""
+                    );
+                }
+
             }
+            System.out.println("execution completed");
         }
 
     }

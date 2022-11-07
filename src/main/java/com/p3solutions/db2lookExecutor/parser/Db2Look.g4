@@ -219,13 +219,13 @@ commentQuery:                          tabSpace* COMMENT ~(TERMINATOR)+ TERMINAT
 
 createTableQuery:                      tabSpace* CREATE tabSpace+ (SUMMARY tabSpace+)? TABLE  ~(TERMINATOR)+ TERMINATOR;
 
-alterTableAddPrimaryKeyQuery:          tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace* CONSTRAINT tabSpace* fullNameModel)? tabSpace+  PRIMARY_KEY tabSpace* LT_BRACKET ~(RT_BRACKET)* RT_BRACKET  ~(TERMINATOR)+ TERMINATOR;
+alterTableAddPrimaryKeyQuery:          tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace* CONSTRAINT tabSpace* fullNameModel)? tabSpace+  PRIMARY_KEY tabSpace*   ~(TERMINATOR)+ TERMINATOR;
 refreshTableQuery:                     tabSpace*  REFRESH tabSpace+ TABLE ~(TERMINATOR)+ TERMINATOR;
 alterTableAddForeignKeyQuery:          tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace+ fullNameModel tabSpace* FOREIGN_KEY  tabSpace* ~(TERMINATOR)+ TERMINATOR;
 
 alterTableAddUniqueConstraintQuery:    tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD (tabSpace+ CONSTRAINT tabSpace* fullNameModel)? tabSpace* UNIQUE ~(TERMINATOR)+ TERMINATOR;
 
-alterTableAddCheckConstraintQuery:     tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace* fullNameModel tabSpace*  CHECK ~(TERMINATOR|CREATE)+ TERMINATOR;
+alterTableAddCheckConstraintQuery:     tabSpace* ALTER tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+ ADD tabSpace+ CONSTRAINT tabSpace* fullNameModel tabSpace*  CHECK ~(TERMINATOR)+ TERMINATOR;
 
 otherAlterQuery:                       tabSpace* ALTER  tabSpace+ TABLE tabSpace+ fullNameModel tabSpace+  ~(PRIMARY_KEY|FOREIGN_KEY|CHECK|UNIQUE|TERMINATOR)+ TERMINATOR;
 

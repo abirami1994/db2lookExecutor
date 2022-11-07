@@ -66,13 +66,17 @@ public class Db2LookFileProcessor {
         Db2LookParser parser = new Db2LookParser(tokens);
         Db2LookParser.FileHandlerContext fileHandlerContext = parser.fileHandler();
     }
+
     private void startProcessing(Db2LookParser.FileHandlerContext tree, String host, String port, String userName, String password, String outputDirectory) throws SQLException, ClassNotFoundException, AnalyzerException, IOException {
       String dbName = null;
+      String bufferPoolQuery = null;
       Map<String , String> failedQueryReasonsMap = new LinkedHashMap<>();
+      List<String> tablespaceQuery = new ArrayList<>();
         Connection connection = null;
+        int flag=0;
         for (int i = 0; i < tree.getChildCount(); i++) {
             ParseTree child = tree.getChild(i);
-          if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
+       if(child instanceof Db2LookParser.ConnectStatementContext && connection == null){
                 String[] split = child.getText().split(" ");
                dbName =  split[split.length-1]
                         .replaceAll("\"","")
@@ -83,10 +87,12 @@ public class Db2LookFileProcessor {
             if(child instanceof Db2LookParser.CreateDatabasePartitionGroupStatementContext){
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
+
             else if(child instanceof Db2LookParser.CreateBufferPoolQueryContext){
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
             else if(child instanceof Db2LookParser.MimicStorageGroupStatementContext){
+
                 queryExecutor.executeQuery(child.getText(), connection, failedQueryReasonsMap);
             }
 
@@ -103,6 +109,9 @@ public class Db2LookFileProcessor {
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree typechild = child.getChild(i1);
                     if(typechild instanceof Db2LookParser.CreateTableQueryContext){
+                        queryExecutor.executeQuery(typechild.getText(), connection, failedQueryReasonsMap);
+                    }
+                    else if(typechild instanceof Db2LookParser.SetStatementContext){
                         queryExecutor.executeQuery(typechild.getText(), connection, failedQueryReasonsMap);
                     }
                 }
@@ -127,6 +136,10 @@ public class Db2LookFileProcessor {
                       tablechild instanceof Db2LookParser.CreateIndexQueryContext){
                         queryExecutor.executeQuery(tablechild.getText(), connection, failedQueryReasonsMap);
                     }
+                    else if(tablechild instanceof Db2LookParser.SetStatementContext){
+                        queryExecutor.executeQuery(tablechild.getText(), connection, failedQueryReasonsMap);
+                    }
+
                 }
             }
             else if(child instanceof Db2LookParser.AlterTableAddForeignKeyQueryContext){
@@ -142,6 +155,11 @@ public class Db2LookFileProcessor {
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree udfChild = child.getChild(i1);
                     if(udfChild instanceof Db2LookParser.CreateUDFQueryContext){
+                        String query = child.getText();
+                        query = query.trim().endsWith(";") ? deleteSemicolon(query) : query;
+                        queryExecutor.executeQuery(query, connection, failedQueryReasonsMap);
+                    }
+                    else if(udfChild instanceof Db2LookParser.SetStatementContext){
                         queryExecutor.executeQuery(udfChild.getText(), connection, failedQueryReasonsMap);
                     }
                 }
@@ -150,6 +168,9 @@ public class Db2LookFileProcessor {
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree viewChild = child.getChild(i1);
                     if(viewChild instanceof Db2LookParser.CreateViewQueryContext){
+                        queryExecutor.executeQuery(viewChild.getText(), connection, failedQueryReasonsMap);
+                    }
+                    else if(viewChild instanceof Db2LookParser.SetStatementContext){
                         queryExecutor.executeQuery(viewChild.getText(), connection, failedQueryReasonsMap);
                     }
                 }
@@ -161,6 +182,11 @@ public class Db2LookFileProcessor {
                 for (int i1 = 0; i1 < child.getChildCount(); i1++) {
                     ParseTree procedureChild = child.getChild(i1);
                     if(procedureChild instanceof Db2LookParser.CreateProcedureQueryContext){
+                        String query = child.getText();
+                        query = query.trim().endsWith(";") ? deleteSemicolon(query) : query;
+                        queryExecutor.executeQuery(query, connection, failedQueryReasonsMap);
+                    }
+                    else if(procedureChild instanceof Db2LookParser.SetStatementContext){
                         queryExecutor.executeQuery(procedureChild.getText(), connection, failedQueryReasonsMap);
                     }
                 }
@@ -192,6 +218,9 @@ public class Db2LookFileProcessor {
                     if(triggerChild instanceof Db2LookParser.CreateTriggerQueryContext){
                         queryExecutor.executeQuery(triggerChild.getText(), connection, failedQueryReasonsMap);
                     }
+                    else if(triggerChild instanceof Db2LookParser.SetStatementContext){
+                        queryExecutor.executeQuery(triggerChild.getText(), connection, failedQueryReasonsMap);
+                    }
                 }
             }
             else if(child instanceof Db2LookParser.CreateAuditStatementContext){
@@ -206,47 +235,62 @@ public class Db2LookFileProcessor {
 
             if(child instanceof Db2LookParser.CreateTableSpaceStatementContext){
                 String newQuery = alterTablespaceQuery(child.getText());
+                tablespaceQuery.add(newQuery);
                 queryExecutor.executeQuery(newQuery, connection, failedQueryReasonsMap);
             }
         }
-        fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
+    fileHandlers.writeLogs(failedQueryReasonsMap, outputDirectory ,dbName);
 
         connection.close();
     }
 
+    private String deleteSemicolon(String query) {
+        StringBuffer sb= new StringBuffer(query);
+//invoking the method
+        sb.deleteCharAt(sb.length()-1);
+        return sb.toString();
+    }
+
     private String alterTablespaceQuery(String query) {
         if(query.contains("(") && query.contains(")")) {
-            String locationPart =  StringUtils.substringBetween(query, "(", ")");
-            if(locationPart.contains(",")){
-                String[] locationSplit = locationPart.split(",");
-                String oldValue = "";
-                String newValue = "";
-                for (int i = 0; i < locationPart.split(",").length; i++) {
-                    if(i==1){
-
-                        String newLocationValue = processLocationAndMakeDir(locationSplit[i].trim().replaceAll("'", "").replace(oldValue, newValue), Boolean.FALSE);
-                        String newLocation1 = "'" + newLocationValue + "'";
-                        query = query.replace(locationSplit[i].trim(), newLocation1);
-
-
-                    }
-                    else{
-                        String[] split = locationSplit[i].split("/");
-                         oldValue = split[split.length-3];
-                        String newLocation1 = processLocationAndMakeDir(locationSplit[i].trim().replaceAll("'", ""), Boolean.TRUE);
-                        String newLocation = "'" + newLocation1 + "'";
-                        query = query.replace(locationSplit[i].trim(), newLocation);
-                        String[] split1 = newLocation1.split("\\\\");
-                         newValue = split[split1.length-2];
-                    }
-                }
-            }
-            else{
-                String newLocation = "'" + processLocationAndMakeDir(locationPart, Boolean.TRUE) + "'";
-                query = query.replace(locationPart, newLocation);
-            }
+            String locationPart = StringUtils.substringBetween(query, "(", ")");
+            query = query.replace("(", "");
+            query = query.replace(")", "");
+            query = query.replace(locationPart, " STOGROUP \"IBMSTOGROUP\" ");
+            query = query.replace("MANAGED BY SYSTEM", "MANAGED BY AUTOMATIC STORAGE ");
         }
-        query = query.replaceAll("\\\\","\\\\\\\\");
+//            if(locationPart.contains(",")){
+//                String[] locationSplit = locationPart.split(",");
+////                String oldValue = "";
+////                String newValue = "";
+//                for (int i = 0; i < locationPart.split(",").length; i++) {
+////                    if(i==1){
+//
+////                        String newLocationValue = processLocationAndMakeDir(locationSplit[i].trim().replaceAll("'", "").replace(oldValue, newValue), Boolean.FALSE);
+////                        String newLocation1 = "'" + newLocationValue + "'";
+////                        query = query.replace(locationSplit[i].trim(), newLocation1);
+////
+////
+////                    }
+////                    else{
+//                        String[] split = locationSplit[i].replaceAll("'","").split("/");
+//                         String newLocation = "C:\\Program Files\\IBM" + "\\" +split[split.length-3] + "\\" +split[split.length-2] + "\\" +split[split.length-1];
+//
+////                        String newLocation1 = processLocationAndMakeDir(locationSplit[i].trim().replaceAll("'", ""), Boolean.TRUE);
+//                         newLocation = "'" + newLocation + "'";
+//                        query = query.replace(locationSplit[i].trim(), newLocation);
+////                        String[] split1 = newLocation1.split("\\\\");
+////                         newValue = split[split1.length-2];
+////                    }
+//                }
+//            }
+//            else{
+//                String newLocation = "'" + processLocationAndMakeDir(locationPart, Boolean.TRUE) + "'";
+//                query = query.replace(locationPart, newLocation);
+//            }
+//        }
+//        query.replace("/","\\\\\\\\");
+//        query = query.replaceAll("\\\\","\\\\\\\\");
         return query;
     }
 
