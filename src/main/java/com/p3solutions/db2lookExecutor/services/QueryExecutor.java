@@ -24,7 +24,7 @@ public class QueryExecutor {
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 int i = statement.executeUpdate();
             } catch (Exception e) {
-                if(!(e.getMessage().contains("-601") || query.toUpperCase(Locale.ROOT).contains("GRANT"))) {
+                if(!(e.getMessage().contains("-601") || e.getMessage().contains("-624") || query.toUpperCase(Locale.ROOT).contains("GRANT"))) {
                     failedQueryReasonMap.put(
                             query,
                             "\"" + (Objects.nonNull(e.getMessage()) ? e.getMessage().replace("\n", " ").replace("\t", " ") : "Some exception occurred") + "\""

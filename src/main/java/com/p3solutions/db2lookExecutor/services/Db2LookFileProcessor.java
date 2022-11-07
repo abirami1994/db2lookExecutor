@@ -245,9 +245,9 @@ public class Db2LookFileProcessor {
     }
 
     private String deleteSemicolon(String query) {
-        StringBuffer sb= new StringBuffer(query);
+        StringBuilder sb= new StringBuilder(query);
 //invoking the method
-        sb.deleteCharAt(sb.length()-1);
+        sb = sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
 
