@@ -2,8 +2,6 @@ package com.p3solutions.db2lookExecutor.services;
 
 import com.p3solutions.db2lookExecutor.beans.DirectoryMeta;
 import com.p3solutions.db2lookExecutor.exception_handler.AnalyzerException;
-import com.p3solutions.db2lookExecutor.parser.Db2LookLexer;
-import com.p3solutions.db2lookExecutor.parser.Db2LookParser;
 import com.p3solutions.db2lookExecutor.parser.syntax.SyntaxErrorListener;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
