@@ -1,4 +1,4 @@
--- This CLP file was created using DB2LOOK Version "10.5" 
+``-- This CLP file was created using DB2LOOK Version "10.5"
 -- Timestamp: Mon 31 Oct 2022 03:01:08 PM CDT
 -- Database Name: P01995RA       
 -- Database Manager Version: DB2/LINUXZ64 Version 10.5.B   
