@@ -1,0 +1,106 @@
+
+
+CREATE FUNCTION EXPLAIN_GET_MSGS( EXPLAIN_REQUESTER VARCHAR(128 OCTETS),
+                                  EXPLAIN_TIME      TIMESTAMP,
+                                  SOURCE_NAME       VARCHAR(128 OCTETS),
+                                  SOURCE_SCHEMA     VARCHAR(128 OCTETS),
+                                  SOURCE_VERSION    VARCHAR(64 OCTETS),
+                                  EXPLAIN_LEVEL     CHAR(1 OCTETS),
+                                  STMTNO            INTEGER,
+                                  SECTNO            INTEGER,
+                                  INLOCALE          VARCHAR(33 OCTETS) )
+  RETURNS TABLE ( EXPLAIN_REQUESTER VARCHAR(128 OCTETS),
+                  EXPLAIN_TIME      TIMESTAMP,
+                  SOURCE_NAME       VARCHAR(128 OCTETS),
+                  SOURCE_SCHEMA     VARCHAR(128 OCTETS),
+                  SOURCE_VERSION    VARCHAR(64 OCTETS),
+                  EXPLAIN_LEVEL     CHAR(1 OCTETS),
+                  STMTNO            INTEGER,
+                  SECTNO            INTEGER,
+                  DIAGNOSTIC_ID     INTEGER,
+                  LOCALE            VARCHAR(33 OCTETS),
+                  MSG               VARCHAR(4096 OCTETS) )
+  SPECIFIC EXPLAIN_GET_MSGS
+  LANGUAGE SQL
+  DETERMINISTIC
+  NO EXTERNAL ACTION
+  READS SQL DATA
+  RETURN SELECT A.A_EXPLAIN_REQUESTER,
+                A.A_EXPLAIN_TIME,
+                A.A_SOURCE_NAME,
+                A.A_SOURCE_SCHEMA,
+                A.A_SOURCE_VERSION,
+                A.A_EXPLAIN_LEVEL,
+                A.A_STMTNO,
+                A.A_SECTNO,
+                A.A_DIAGNOSTIC_ID,
+                F.LOCALE,
+                F.MSG
+         FROM EXPLAIN_DIAGNOSTIC A( A_EXPLAIN_REQUESTER,
+                                    A_EXPLAIN_TIME,
+                                    A_SOURCE_NAME,
+                                    A_SOURCE_SCHEMA,
+                                    A_SOURCE_VERSION,
+                                    A_EXPLAIN_LEVEL,
+                                    A_STMTNO,
+                                    A_SECTNO,
+                                    A_DIAGNOSTIC_ID,
+                                    A_CODE ),
+              TABLE( SYSPROC.EXPLAIN_GET_MSG2(
+                       INLOCALE,
+                       A.A_CODE,
+                       ( SELECT TOKEN FROM EXPLAIN_DIAGNOSTIC_DATA B
+                         WHERE A.A_EXPLAIN_REQUESTER = B.EXPLAIN_REQUESTER
+                           AND A.A_EXPLAIN_TIME      = B.EXPLAIN_TIME
+                           AND A.A_SOURCE_NAME       = B.SOURCE_NAME
+                           AND A.A_SOURCE_SCHEMA     = B.SOURCE_SCHEMA
+                           AND A.A_SOURCE_VERSION    = B.SOURCE_VERSION
+                           AND A.A_EXPLAIN_LEVEL     = B.EXPLAIN_LEVEL
+                           AND A.A_STMTNO            = B.STMTNO
+                           AND A.A_SECTNO            = B.SECTNO
+                           AND A.A_DIAGNOSTIC_ID     = B.DIAGNOSTIC_ID
+                           AND B.ORDINAL=1 ),
+                       ( SELECT TOKEN FROM EXPLAIN_DIAGNOSTIC_DATA B
+                         WHERE A.A_EXPLAIN_REQUESTER = B.EXPLAIN_REQUESTER
+                           AND A.A_EXPLAIN_TIME      = B.EXPLAIN_TIME
+                           AND A.A_SOURCE_NAME       = B.SOURCE_NAME
+                           AND A.A_SOURCE_SCHEMA     = B.SOURCE_SCHEMA
+
+                           AND A.A_SOURCE_VERSION    = B.SOURCE_VERSION
+                           AND A.A_EXPLAIN_LEVEL     = B.EXPLAIN_LEVEL
+                           AND A.A_STMTNO            = B.STMTNO
+                           AND A.A_SECTNO            = B.SECTNO
+                           AND A.A_DIAGNOSTIC_ID     = B.DIAGNOSTIC_ID
+                           AND B.ORDINAL=2 ),
+                       ( SELECT TOKEN FROM EXPLAIN_DIAGNOSTIC_DATA B
+                         WHERE A.A_EXPLAIN_REQUESTER = B.EXPLAIN_REQUESTER
+                           AND A.A_EXPLAIN_TIME      = B.EXPLAIN_TIME
+                           AND A.A_SOURCE_NAME       = B.SOURCE_NAME
+                           AND A.A_SOURCE_SCHEMA     = B.SOURCE_SCHEMA
+                           AND A.A_SOURCE_VERSION    = B.SOURCE_VERSION
+                           AND A.A_EXPLAIN_LEVEL     = B.EXPLAIN_LEVEL
+                           AND A.A_STMTNO            = B.STMTNO
+                           AND A.A_SECTNO            = B.SECTNO
+                           AND A.A_DIAGNOSTIC_ID     = B.DIAGNOSTIC_ID
+                           AND B.ORDINAL=3 ) ) ) F
+         WHERE ( EXPLAIN_REQUESTER IS NULL OR
+                 EXPLAIN_REQUESTER = A.A_EXPLAIN_REQUESTER )
+           AND ( EXPLAIN_TIME      IS NULL OR
+                 EXPLAIN_TIME      = A.A_EXPLAIN_TIME      )
+           AND ( SOURCE_NAME       IS NULL OR
+                 SOURCE_NAME       = A.A_SOURCE_NAME       )
+           AND ( SOURCE_SCHEMA     IS NULL OR
+                 SOURCE_SCHEMA     = A.A_SOURCE_SCHEMA     )
+           AND ( SOURCE_VERSION    IS NULL OR
+                 SOURCE_VERSION    = A.A_SOURCE_VERSION    )
+           AND ( EXPLAIN_LEVEL     IS NULL OR
+                 EXPLAIN_LEVEL     = A.A_EXPLAIN_LEVEL     )
+           AND ( STMTNO            IS NULL OR
+                 STMTNO            = A.A_STMTNO            )
+           AND ( SECTNO            IS NULL OR
+                 SECTNO            = A.A_SECTNO            );
+
+
+
+
+--"DB2 SQL Error: SQLCODE=-104, SQLSTATE=42601, SQLERRMC=;;_SECTNO            );END-OF-STATEMENT, DRIVER=4.32.28"
