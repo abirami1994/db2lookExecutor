@@ -133,7 +133,8 @@ LOWERCASE:                              [a-z]+;
 UPPERCASE:                              [A-Z]+;
 COLON:                                  ':';
 QUESTION_MARK:                          '?';
-
+ANNOTATION:                            '@';
+SYMBOL1:                                 '~';
 fileHandler:                             (tabSpace*  (tabSpace*   (connectStatement|
                                           createDatabasePartitionGroupStatement|
                                           createBufferPoolStatement|
@@ -246,7 +247,7 @@ createStoredProcedureStatement:        (tabSpace* setStatement)* tabSpace* creat
 createProcedureQuery:                  CREATE tabSpace+ PROCEDURE tabSpace+ fullNameModel ~(TERMINATOR)+ tabSpace*  TERMINATOR;
 
 createTriggerStatement:                (tabSpace* setStatement)* tabSpace* createTriggerQuery;
-createTriggerQuery:                    CREATE tabSpace+ TRIGGER tabSpace+ fullNameModel .*?   (tabSpace* END TERMINATOR);
+createTriggerQuery:                    CREATE tabSpace+ TRIGGER tabSpace+ fullNameModel ~(TERMINATOR)+   TERMINATOR;
 
 grantStatement:                        tabSpace* grantQuery;
 grantQuery:                            GRANT ~(TERMINATOR)+ TERMINATOR;

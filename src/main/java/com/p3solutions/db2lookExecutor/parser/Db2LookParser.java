@@ -31,7 +31,8 @@ public class Db2LookParser extends Parser {
 		NUMS=70, NUMBER=71, EQUAL=72, OR_OPERATOR=73, LT_SET_BRACKET=74, RT_SET_BRACKET=75, 
 		ASTRIEK=76, SMALLER_THAN=77, GREATER_THAN=78, PERCENTAGE=79, PLUS=80, 
 		SUB=81, DOLLAR=82, DECLARE=83, ASTERIK=84, EXCLAMATION=85, WORD=86, DIGIT=87, 
-		LOWERCASE=88, UPPERCASE=89, COLON=90, QUESTION_MARK=91;
+		LOWERCASE=88, UPPERCASE=89, COLON=90, QUESTION_MARK=91, ANNOTATION=92, 
+		SYMBOL1=93;
 	public static final int
 		RULE_fileHandler = 0, RULE_alterNickNameStatement = 1, RULE_createNickStatement = 2, 
 		RULE_createUserMappingStatement = 3, RULE_alterViewStatement = 4, RULE_createServerStatement = 5, 
@@ -89,7 +90,8 @@ public class Db2LookParser extends Parser {
 			null, null, null, null, "'('", "')'", null, null, "';'", null, null, 
 			null, null, null, null, null, null, null, null, null, "'=>'", "'.'", 
 			null, null, "'='", "'|'", "'['", "']'", "'*'", "'<'", "'>'", "'%'", "'+'", 
-			"'-'", "'$'", null, "'&'", "'!'", null, null, null, null, "':'", "'?'"
+			"'-'", "'$'", null, "'&'", "'!'", null, null, null, null, "':'", "'?'", 
+			"'@'", "'~'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -108,7 +110,7 @@ public class Db2LookParser extends Parser {
 			"DOT", "NUMS", "NUMBER", "EQUAL", "OR_OPERATOR", "LT_SET_BRACKET", "RT_SET_BRACKET", 
 			"ASTRIEK", "SMALLER_THAN", "GREATER_THAN", "PERCENTAGE", "PLUS", "SUB", 
 			"DOLLAR", "DECLARE", "ASTERIK", "EXCLAMATION", "WORD", "DIGIT", "LOWERCASE", 
-			"UPPERCASE", "COLON", "QUESTION_MARK"
+			"UPPERCASE", "COLON", "QUESTION_MARK", "ANNOTATION", "SYMBOL1"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -851,7 +853,7 @@ public class Db2LookParser extends Parser {
 				setState(237); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(239);
 			match(TERMINATOR);
 			}
@@ -959,7 +961,7 @@ public class Db2LookParser extends Parser {
 				setState(257); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(259);
 			match(TERMINATOR);
 			}
@@ -1084,7 +1086,7 @@ public class Db2LookParser extends Parser {
 				setState(283); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(285);
 			match(TERMINATOR);
 			}
@@ -1192,7 +1194,7 @@ public class Db2LookParser extends Parser {
 				setState(303); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(305);
 			match(TERMINATOR);
 			}
@@ -1300,7 +1302,7 @@ public class Db2LookParser extends Parser {
 				setState(323); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(325);
 			match(TERMINATOR);
 			}
@@ -1434,7 +1436,7 @@ public class Db2LookParser extends Parser {
 				setState(349); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(351);
 			match(TERMINATOR);
 			}
@@ -1542,7 +1544,7 @@ public class Db2LookParser extends Parser {
 				setState(369); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(371);
 			match(TERMINATOR);
 			}
@@ -2064,7 +2066,7 @@ public class Db2LookParser extends Parser {
 				setState(456); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(458);
 			match(TERMINATOR);
 			}
@@ -2223,7 +2225,7 @@ public class Db2LookParser extends Parser {
 				setState(478); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(480);
 			match(TERMINATOR);
 			}
@@ -2364,7 +2366,7 @@ public class Db2LookParser extends Parser {
 			setState(500);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0)) {
 				{
 				{
 				setState(497);
@@ -2599,7 +2601,7 @@ public class Db2LookParser extends Parser {
 				setState(539); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << TERMINATOR) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << TERMINATOR) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(541);
 			match(TABLESPACE);
 			setState(543); 
@@ -2623,7 +2625,7 @@ public class Db2LookParser extends Parser {
 				setState(545); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(547);
 			match(TERMINATOR);
 			}
@@ -2782,7 +2784,7 @@ public class Db2LookParser extends Parser {
 				setState(567); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(569);
 			match(TERMINATOR);
 			}
@@ -2941,7 +2943,7 @@ public class Db2LookParser extends Parser {
 				setState(589); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(591);
 			match(TERMINATOR);
 			}
@@ -3165,7 +3167,7 @@ public class Db2LookParser extends Parser {
 				setState(629); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(631);
 			match(TERMINATOR);
 			}
@@ -3350,7 +3352,7 @@ public class Db2LookParser extends Parser {
 				setState(657); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(659);
 			match(TERMINATOR);
 			}
@@ -3718,7 +3720,7 @@ public class Db2LookParser extends Parser {
 				setState(733); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(735);
 			match(TERMINATOR);
 			}
@@ -3851,7 +3853,7 @@ public class Db2LookParser extends Parser {
 				setState(761); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(763);
 			match(TERMINATOR);
 			}
@@ -4081,7 +4083,7 @@ public class Db2LookParser extends Parser {
 				setState(821); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(823);
 			match(TERMINATOR);
 			}
@@ -4189,7 +4191,7 @@ public class Db2LookParser extends Parser {
 				setState(841); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(843);
 			match(TERMINATOR);
 			}
@@ -4415,7 +4417,7 @@ public class Db2LookParser extends Parser {
 				setState(898); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(900);
 			match(TERMINATOR);
 			}
@@ -4629,7 +4631,7 @@ public class Db2LookParser extends Parser {
 				setState(953); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(955);
 			match(TERMINATOR);
 			}
@@ -4835,7 +4837,7 @@ public class Db2LookParser extends Parser {
 				setState(1005); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(1007);
 			match(TERMINATOR);
 			}
@@ -5005,7 +5007,7 @@ public class Db2LookParser extends Parser {
 				setState(1036); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(1038);
 			match(TERMINATOR);
 			}
@@ -5178,7 +5180,7 @@ public class Db2LookParser extends Parser {
 				setState(1072); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(1074);
 			match(TERMINATOR);
 			}
@@ -5269,7 +5271,7 @@ public class Db2LookParser extends Parser {
 				setState(1086); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(1088);
 			match(TERMINATOR);
 			}
@@ -5787,7 +5789,7 @@ public class Db2LookParser extends Parser {
 				setState(1190); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(1192);
 			match(TERMINATOR);
 			}
@@ -5972,7 +5974,7 @@ public class Db2LookParser extends Parser {
 				setState(1218); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			setState(1220);
 			match(TERMINATOR);
 			}
@@ -6342,8 +6344,10 @@ public class Db2LookParser extends Parser {
 		public FullNameModelContext fullNameModel() {
 			return getRuleContext(FullNameModelContext.class,0);
 		}
-		public TerminalNode END() { return getToken(Db2LookParser.END, 0); }
-		public TerminalNode TERMINATOR() { return getToken(Db2LookParser.TERMINATOR, 0); }
+		public List<TerminalNode> TERMINATOR() { return getTokens(Db2LookParser.TERMINATOR); }
+		public TerminalNode TERMINATOR(int i) {
+			return getToken(Db2LookParser.TERMINATOR, i);
+		}
 		public List<TabSpaceContext> tabSpace() {
 			return getRuleContexts(TabSpaceContext.class);
 		}
@@ -6417,42 +6421,30 @@ public class Db2LookParser extends Parser {
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			setState(1300);
 			fullNameModel();
-			setState(1304);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,176,_ctx);
-			while ( _alt!=1 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1+1 ) {
-					{
-					{
-					setState(1301);
-					matchWildcard();
-					}
-					} 
-				}
-				setState(1306);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,176,_ctx);
-			}
-			{
-			setState(1310);
+			setState(1302); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
+			do {
 				{
 				{
-				setState(1307);
-				tabSpace();
+				setState(1301);
+				_la = _input.LA(1);
+				if ( _la <= 0 || (_la==TERMINATOR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
 				}
 				}
-				setState(1312);
+				}
+				setState(1304); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			}
-			setState(1313);
-			match(END);
-			setState(1314);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
+			setState(1306);
 			match(TERMINATOR);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -6502,21 +6494,21 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1319);
+			setState(1311);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1316);
+				setState(1308);
 				tabSpace();
 				}
 				}
-				setState(1321);
+				setState(1313);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1322);
+			setState(1314);
 			grantQuery();
 			}
 		}
@@ -6563,15 +6555,15 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1324);
+			setState(1316);
 			match(GRANT);
-			setState(1326); 
+			setState(1318); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(1325);
+				setState(1317);
 				_la = _input.LA(1);
 				if ( _la <= 0 || (_la==TERMINATOR) ) {
 				_errHandler.recoverInline(this);
@@ -6583,11 +6575,11 @@ public class Db2LookParser extends Parser {
 				}
 				}
 				}
-				setState(1328); 
+				setState(1320); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
-			setState(1330);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
+			setState(1322);
 			match(TERMINATOR);
 			}
 		}
@@ -6640,29 +6632,29 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1335);
+			setState(1327);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1332);
+				setState(1324);
 				tabSpace();
 				}
 				}
-				setState(1337);
+				setState(1329);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1338);
+			setState(1330);
 			match(TERMINATE);
-			setState(1340); 
+			setState(1332); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(1339);
+				setState(1331);
 				_la = _input.LA(1);
 				if ( _la <= 0 || (_la==EOF) ) {
 				_errHandler.recoverInline(this);
@@ -6674,10 +6666,10 @@ public class Db2LookParser extends Parser {
 				}
 				}
 				}
-				setState(1342); 
+				setState(1334); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << TERMINATOR) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << TERMINATOR) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -6720,7 +6712,7 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1344);
+			setState(1336);
 			tabSpace();
 			}
 		}
@@ -6773,29 +6765,29 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1349);
+			setState(1341);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1346);
+				setState(1338);
 				tabSpace();
 				}
 				}
-				setState(1351);
+				setState(1343);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1352);
+			setState(1344);
 			match(COMMIT);
-			setState(1354); 
+			setState(1346); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(1353);
+				setState(1345);
 				_la = _input.LA(1);
 				if ( _la <= 0 || (_la==TERMINATOR) ) {
 				_errHandler.recoverInline(this);
@@ -6807,11 +6799,11 @@ public class Db2LookParser extends Parser {
 				}
 				}
 				}
-				setState(1356); 
+				setState(1348); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
-			setState(1358);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
+			setState(1350);
 			match(TERMINATOR);
 			}
 		}
@@ -6871,45 +6863,45 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1363);
+			setState(1355);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1360);
+				setState(1352);
 				tabSpace();
 				}
 				}
-				setState(1365);
+				setState(1357);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1366);
+			setState(1358);
 			match(CREATE);
-			setState(1370);
+			setState(1362);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1367);
+				setState(1359);
 				space();
 				}
 				}
-				setState(1372);
+				setState(1364);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1373);
+			setState(1365);
 			match(TRUSTED_CONTEXT);
-			setState(1375); 
+			setState(1367); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(1374);
+				setState(1366);
 				_la = _input.LA(1);
 				if ( _la <= 0 || (_la==TERMINATOR) ) {
 				_errHandler.recoverInline(this);
@@ -6921,11 +6913,11 @@ public class Db2LookParser extends Parser {
 				}
 				}
 				}
-				setState(1377); 
+				setState(1369); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
-			setState(1379);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
+			setState(1371);
 			match(TERMINATOR);
 			}
 		}
@@ -6980,61 +6972,61 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1384);
+			setState(1376);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1381);
+				setState(1373);
 				tabSpace();
 				}
 				}
-				setState(1386);
+				setState(1378);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1387);
+			setState(1379);
 			match(CREATE);
-			setState(1391);
+			setState(1383);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1388);
+				setState(1380);
 				tabSpace();
 				}
 				}
-				setState(1393);
+				setState(1385);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1394);
+			setState(1386);
 			match(AUDIT);
-			setState(1398);
+			setState(1390);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1395);
+				setState(1387);
 				tabSpace();
 				}
 				}
-				setState(1400);
+				setState(1392);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1401);
+			setState(1393);
 			match(POLICY);
-			setState(1403); 
+			setState(1395); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(1402);
+				setState(1394);
 				_la = _input.LA(1);
 				if ( _la <= 0 || (_la==TERMINATOR) ) {
 				_errHandler.recoverInline(this);
@@ -7046,11 +7038,11 @@ public class Db2LookParser extends Parser {
 				}
 				}
 				}
-				setState(1405); 
+				setState(1397); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
-			setState(1407);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
+			setState(1399);
 			match(TERMINATOR);
 			}
 		}
@@ -7105,61 +7097,61 @@ public class Db2LookParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1412);
+			setState(1404);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1409);
+				setState(1401);
 				tabSpace();
 				}
 				}
-				setState(1414);
+				setState(1406);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1415);
+			setState(1407);
 			match(CREATE);
-			setState(1419);
+			setState(1411);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 				{
 				{
-				setState(1416);
+				setState(1408);
 				tabSpace();
 				}
 				}
-				setState(1421);
+				setState(1413);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1422);
+			setState(1414);
 			match(ROLE);
-			setState(1426);
+			setState(1418);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,193,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,192,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(1423);
+					setState(1415);
 					tabSpace();
 					}
 					} 
 				}
-				setState(1428);
+				setState(1420);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,193,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,192,_ctx);
 			}
-			setState(1430); 
+			setState(1422); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(1429);
+				setState(1421);
 				_la = _input.LA(1);
 				if ( _la <= 0 || (_la==TERMINATOR) ) {
 				_errHandler.recoverInline(this);
@@ -7171,11 +7163,11 @@ public class Db2LookParser extends Parser {
 				}
 				}
 				}
-				setState(1432); 
+				setState(1424); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)))) != 0) );
-			setState(1434);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CONNECT) | (1L << TO) | (1L << SUMMARY) | (1L << TYPE) | (1L << WRAPPER) | (1L << SEQUENCE) | (1L << CREATE) | (1L << ALIAS) | (1L << ALTER) | (1L << INDEX) | (1L << LARGE) | (1L << REGULAR) | (1L << SYSTEM) | (1L << USER) | (1L << TEMPORARY) | (1L << TABLESPACE) | (1L << SCHEMA) | (1L << REFRESH) | (1L << TABLE) | (1L << ADD) | (1L << PRIMARY_KEY) | (1L << FOREIGN_KEY) | (1L << DATABASE) | (1L << PARTITION) | (1L << GROUP) | (1L << UNIQUE) | (1L << CHECK) | (1L << GRANT) | (1L << RESET) | (1L << SET) | (1L << TRUSTED_CONTEXT) | (1L << COMMIT) | (1L << TERMINATE) | (1L << BUFFERPOOL) | (1L << STOGROUP) | (1L << OR_REPLACE) | (1L << VIEW) | (1L << PROCEDURE) | (1L << FUNCTION) | (1L << COMMENT) | (1L << TRIGGER) | (1L << BEGIN) | (1L << END) | (1L << CONSTRAINT) | (1L << AUDIT) | (1L << POLICY) | (1L << ROLE) | (1L << SERVER) | (1L << MAPPING) | (1L << NICKNAME) | (1L << LT_BRACKET) | (1L << RT_BRACKET) | (1L << SYMBOL9) | (1L << SLASH) | (1L << SEMI_COLON) | (1L << QUOTATION) | (1L << COMMA) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3) | (1L << CURLY_BRACKET1))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (CURLY_BRACKET2 - 64)) | (1L << (COMMENTS - 64)) | (1L << (SINGLE_COMMENTS - 64)) | (1L << (HASH_SKIPPER - 64)) | (1L << (POINTER_SYMBOL - 64)) | (1L << (DOT - 64)) | (1L << (NUMS - 64)) | (1L << (NUMBER - 64)) | (1L << (EQUAL - 64)) | (1L << (OR_OPERATOR - 64)) | (1L << (LT_SET_BRACKET - 64)) | (1L << (RT_SET_BRACKET - 64)) | (1L << (ASTRIEK - 64)) | (1L << (SMALLER_THAN - 64)) | (1L << (GREATER_THAN - 64)) | (1L << (PERCENTAGE - 64)) | (1L << (PLUS - 64)) | (1L << (SUB - 64)) | (1L << (DOLLAR - 64)) | (1L << (DECLARE - 64)) | (1L << (ASTERIK - 64)) | (1L << (EXCLAMATION - 64)) | (1L << (WORD - 64)) | (1L << (DIGIT - 64)) | (1L << (LOWERCASE - 64)) | (1L << (UPPERCASE - 64)) | (1L << (COLON - 64)) | (1L << (QUESTION_MARK - 64)) | (1L << (ANNOTATION - 64)) | (1L << (SYMBOL1 - 64)))) != 0) );
+			setState(1426);
 			match(TERMINATOR);
 			}
 		}
@@ -7237,91 +7229,91 @@ public class Db2LookParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1462);
+			setState(1454);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,199,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,198,_ctx) ) {
 			case 1:
 				{
-				setState(1445);
+				setState(1437);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,196,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,195,_ctx) ) {
 				case 1:
 					{
-					setState(1436);
+					setState(1428);
 					databaseName();
-					setState(1440);
+					setState(1432);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 						{
 						{
-						setState(1437);
+						setState(1429);
 						space();
 						}
 						}
-						setState(1442);
+						setState(1434);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(1443);
+					setState(1435);
 					match(DOT);
 					}
 					break;
 				}
-				setState(1450);
+				setState(1442);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,197,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,196,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(1447);
+						setState(1439);
 						space();
 						}
 						} 
 					}
-					setState(1452);
+					setState(1444);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,197,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,196,_ctx);
 				}
-				setState(1453);
+				setState(1445);
 				schemaName();
-				setState(1457);
+				setState(1449);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0)) {
 					{
 					{
-					setState(1454);
+					setState(1446);
 					space();
 					}
 					}
-					setState(1459);
+					setState(1451);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1460);
+				setState(1452);
 				match(DOT);
 				}
 				break;
 			}
-			setState(1467);
+			setState(1459);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,200,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,199,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(1464);
+					setState(1456);
 					space();
 					}
 					} 
 				}
-				setState(1469);
+				setState(1461);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,200,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,199,_ctx);
 			}
-			setState(1470);
+			setState(1462);
 			tableName();
 			}
 		}
@@ -7365,7 +7357,7 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1472);
+			setState(1464);
 			name();
 			}
 		}
@@ -7409,7 +7401,7 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1474);
+			setState(1466);
 			name();
 			}
 		}
@@ -7453,7 +7445,7 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1476);
+			setState(1468);
 			name();
 			}
 		}
@@ -7502,7 +7494,7 @@ public class Db2LookParser extends Parser {
 		NameContext _localctx = new NameContext(_ctx, getState());
 		enterRule(_localctx, 122, RULE_name);
 		try {
-			setState(1483);
+			setState(1475);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case USER:
@@ -7514,7 +7506,7 @@ public class Db2LookParser extends Parser {
 			case WORD:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1478);
+				setState(1470);
 				handle();
 				}
 				break;
@@ -7522,11 +7514,11 @@ public class Db2LookParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				{
-				setState(1479);
+				setState(1471);
 				match(QUOTATION);
-				setState(1480);
+				setState(1472);
 				variable();
-				setState(1481);
+				setState(1473);
 				match(QUOTATION);
 				}
 				}
@@ -7586,83 +7578,83 @@ public class Db2LookParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1488);
+			setState(1480);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,201,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(1477);
+					space();
+					}
+					} 
+				}
+				setState(1482);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,201,_ctx);
+			}
+			setState(1483);
+			handle();
+			setState(1487);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,202,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(1485);
+					setState(1484);
 					space();
 					}
 					} 
 				}
-				setState(1490);
+				setState(1489);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,202,_ctx);
 			}
-			setState(1491);
-			handle();
-			setState(1495);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,203,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					{
-					{
-					setState(1492);
-					space();
-					}
-					} 
-				}
-				setState(1497);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,203,_ctx);
-			}
-			setState(1513);
+			setState(1505);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << USER) | (1L << SCHEMA) | (1L << GROUP) | (1L << SPACE) | (1L << TAB) | (1L << TAB1) | (1L << TAB3))) != 0) || _la==WORD) {
 				{
 				{
-				setState(1501);
+				setState(1493);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,203,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+						setState(1490);
+						space();
+						}
+						} 
+					}
+					setState(1495);
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,203,_ctx);
+				}
+				setState(1496);
+				handle();
+				setState(1500);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,204,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(1498);
+						setState(1497);
 						space();
 						}
 						} 
 					}
-					setState(1503);
+					setState(1502);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,204,_ctx);
 				}
-				setState(1504);
-				handle();
-				setState(1508);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,205,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(1505);
-						space();
-						}
-						} 
-					}
-					setState(1510);
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,205,_ctx);
 				}
 				}
-				}
-				setState(1515);
+				setState(1507);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -7713,7 +7705,7 @@ public class Db2LookParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1516);
+			setState(1508);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << USER) | (1L << SCHEMA) | (1L << GROUP) | (1L << SPACE) | (1L << TAB) | (1L << TAB1))) != 0) || _la==WORD) ) {
 			_errHandler.recoverInline(this);
@@ -7737,7 +7729,7 @@ public class Db2LookParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3]\u05f1\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3_\u05e9\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -7844,167 +7836,166 @@ public class Db2LookParser extends Parser {
 		"\f\61\16\61\u04fb\13\61\3\61\7\61\u04fe\n\61\f\61\16\61\u0501\13\61\3"+
 		"\61\7\61\u0504\n\61\f\61\16\61\u0507\13\61\3\61\3\61\3\62\3\62\6\62\u050d"+
 		"\n\62\r\62\16\62\u050e\3\62\3\62\6\62\u0513\n\62\r\62\16\62\u0514\3\62"+
-		"\3\62\7\62\u0519\n\62\f\62\16\62\u051c\13\62\3\62\7\62\u051f\n\62\f\62"+
-		"\16\62\u0522\13\62\3\62\3\62\3\62\3\63\7\63\u0528\n\63\f\63\16\63\u052b"+
-		"\13\63\3\63\3\63\3\64\3\64\6\64\u0531\n\64\r\64\16\64\u0532\3\64\3\64"+
-		"\3\65\7\65\u0538\n\65\f\65\16\65\u053b\13\65\3\65\3\65\6\65\u053f\n\65"+
-		"\r\65\16\65\u0540\3\66\3\66\3\67\7\67\u0546\n\67\f\67\16\67\u0549\13\67"+
-		"\3\67\3\67\6\67\u054d\n\67\r\67\16\67\u054e\3\67\3\67\38\78\u0554\n8\f"+
-		"8\168\u0557\138\38\38\78\u055b\n8\f8\168\u055e\138\38\38\68\u0562\n8\r"+
-		"8\168\u0563\38\38\39\79\u0569\n9\f9\169\u056c\139\39\39\79\u0570\n9\f"+
-		"9\169\u0573\139\39\39\79\u0577\n9\f9\169\u057a\139\39\39\69\u057e\n9\r"+
-		"9\169\u057f\39\39\3:\7:\u0585\n:\f:\16:\u0588\13:\3:\3:\7:\u058c\n:\f"+
-		":\16:\u058f\13:\3:\3:\7:\u0593\n:\f:\16:\u0596\13:\3:\6:\u0599\n:\r:\16"+
-		":\u059a\3:\3:\3;\3;\7;\u05a1\n;\f;\16;\u05a4\13;\3;\3;\5;\u05a8\n;\3;"+
-		"\7;\u05ab\n;\f;\16;\u05ae\13;\3;\3;\7;\u05b2\n;\f;\16;\u05b5\13;\3;\3"+
-		";\5;\u05b9\n;\3;\7;\u05bc\n;\f;\16;\u05bf\13;\3;\3;\3<\3<\3=\3=\3>\3>"+
-		"\3?\3?\3?\3?\3?\5?\u05ce\n?\3@\7@\u05d1\n@\f@\16@\u05d4\13@\3@\3@\7@\u05d8"+
-		"\n@\f@\16@\u05db\13@\3@\7@\u05de\n@\f@\16@\u05e1\13@\3@\3@\7@\u05e5\n"+
-		"@\f@\16@\u05e8\13@\7@\u05ea\n@\f@\16@\u05ed\13@\3A\3A\3A\3\u051a\2B\2"+
-		"\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJL"+
-		"NPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\2\t\3\2\65\65\3\2=@\4\2\r\16\21\21\3"+
-		"\2\22\22\5\2\27\30\34\35\65\65\2\3\7\2\20\20\23\23\33\33=?XX\2\u06a1\2"+
-		"\u0085\3\2\2\2\4\u00e2\3\2\2\2\6\u00f6\3\2\2\2\b\u010a\3\2\2\2\n\u0124"+
-		"\3\2\2\2\f\u0138\3\2\2\2\16\u014c\3\2\2\2\20\u0166\3\2\2\2\22\u0177\3"+
-		"\2\2\2\24\u017c\3\2\2\2\26\u0181\3\2\2\2\30\u0199\3\2\2\2\32\u01af\3\2"+
-		"\2\2\34\u01b4\3\2\2\2\36\u01d1\3\2\2\2 \u01d6\3\2\2\2\"\u01e7\3\2\2\2"+
-		"$\u01ec\3\2\2\2&\u01fe\3\2\2\2(\u0203\3\2\2\2*\u022a\3\2\2\2,\u022f\3"+
-		"\2\2\2.\u0240\3\2\2\2\60\u0245\3\2\2\2\62\u025c\3\2\2\2\64\u0267\3\2\2"+
-		"\2\66\u027e\3\2\2\28\u0283\3\2\2\2:\u029a\3\2\2\2<\u02d8\3\2\2\2>\u02e6"+
-		"\3\2\2\2@\u0302\3\2\2\2B\u033e\3\2\2\2D\u0352\3\2\2\2F\u038b\3\2\2\2H"+
-		"\u03c2\3\2\2\2J\u03f6\3\2\2\2L\u0415\3\2\2\2N\u0439\3\2\2\2P\u044d\3\2"+
-		"\2\2R\u0458\3\2\2\2T\u048d\3\2\2\2V\u0498\3\2\2\2X\u04af\3\2\2\2Z\u04b4"+
-		"\3\2\2\2\\\u04d1\3\2\2\2^\u04dc\3\2\2\2`\u04ff\3\2\2\2b\u050a\3\2\2\2"+
-		"d\u0529\3\2\2\2f\u052e\3\2\2\2h\u0539\3\2\2\2j\u0542\3\2\2\2l\u0547\3"+
-		"\2\2\2n\u0555\3\2\2\2p\u056a\3\2\2\2r\u0586\3\2\2\2t\u05b8\3\2\2\2v\u05c2"+
-		"\3\2\2\2x\u05c4\3\2\2\2z\u05c6\3\2\2\2|\u05cd\3\2\2\2~\u05d2\3\2\2\2\u0080"+
-		"\u05ee\3\2\2\2\u0082\u0084\5\22\n\2\u0083\u0082\3\2\2\2\u0084\u0087\3"+
-		"\2\2\2\u0085\u0083\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u00c4\3\2\2\2\u0087"+
-		"\u0085\3\2\2\2\u0088\u008a\5\22\n\2\u0089\u0088\3\2\2\2\u008a\u008d\3"+
-		"\2\2\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c\u00ba\3\2\2\2\u008d"+
-		"\u008b\3\2\2\2\u008e\u00bb\5\24\13\2\u008f\u00bb\5\32\16\2\u0090\u00bb"+
-		"\5\36\20\2\u0091\u00bb\5\"\22\2\u0092\u00bb\5&\24\2\u0093\u00bb\5*\26"+
-		"\2\u0094\u00bb\5r:\2\u0095\u00bb\5.\30\2\u0096\u00bb\5\62\32\2\u0097\u00bb"+
-		"\5\66\34\2\u0098\u00bb\5\16\b\2\u0099\u00bb\5<\37\2\u009a\u00bb\5D#\2"+
-		"\u009b\u009d\5\22\n\2\u009c\u009b\3\2\2\2\u009d\u00a0\3\2\2\2\u009e\u009c"+
-		"\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a1\3\2\2\2\u00a0\u009e\3\2\2\2\u00a1"+
-		"\u00a3\5N(\2\u00a2\u009e\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2\3\2\2"+
-		"\2\u00a4\u00a5\3\2\2\2\u00a5\u00a7\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7\u00bb"+
-		"\5H%\2\u00a8\u00bb\5P)\2\u00a9\u00bb\5T+\2\u00aa\u00bb\5X-\2\u00ab\u00bb"+
-		"\5:\36\2\u00ac\u00bb\5\\/\2\u00ad\u00bb\5`\61\2\u00ae\u00bb\5p9\2\u00af"+
-		"\u00bb\5n8\2\u00b0\u00bb\5\30\r\2\u00b1\u00bb\5L\'\2\u00b2\u00bb\5\n\6"+
-		"\2\u00b3\u00bb\5\f\7\2\u00b4\u00bb\5T+\2\u00b5\u00bb\5\20\t\2\u00b6\u00bb"+
-		"\5\6\4\2\u00b7\u00bb\5\b\5\2\u00b8\u00bb\5\4\3\2\u00b9\u00bb\5d\63\2\u00ba"+
-		"\u008e\3\2\2\2\u00ba\u008f\3\2\2\2\u00ba\u0090\3\2\2\2\u00ba\u0091\3\2"+
-		"\2\2\u00ba\u0092\3\2\2\2\u00ba\u0093\3\2\2\2\u00ba\u0094\3\2\2\2\u00ba"+
-		"\u0095\3\2\2\2\u00ba\u0096\3\2\2\2\u00ba\u0097\3\2\2\2\u00ba\u0098\3\2"+
-		"\2\2\u00ba\u0099\3\2\2\2\u00ba\u009a\3\2\2\2\u00ba\u00a4\3\2\2\2\u00ba"+
-		"\u00a8\3\2\2\2\u00ba\u00a9\3\2\2\2\u00ba\u00aa\3\2\2\2\u00ba\u00ab\3\2"+
-		"\2\2\u00ba\u00ac\3\2\2\2\u00ba\u00ad\3\2\2\2\u00ba\u00ae\3\2\2\2\u00ba"+
-		"\u00af\3\2\2\2\u00ba\u00b0\3\2\2\2\u00ba\u00b1\3\2\2\2\u00ba\u00b2\3\2"+
-		"\2\2\u00ba\u00b3\3\2\2\2\u00ba\u00b4\3\2\2\2\u00ba\u00b5\3\2\2\2\u00ba"+
-		"\u00b6\3\2\2\2\u00ba\u00b7\3\2\2\2\u00ba\u00b8\3\2\2\2\u00ba\u00b9\3\2"+
-		"\2\2\u00bb\u00bf\3\2\2\2\u00bc\u00be\5\22\n\2\u00bd\u00bc\3\2\2\2\u00be"+
-		"\u00c1\3\2\2\2\u00bf\u00bd\3\2\2\2\u00bf\u00c0\3\2\2\2\u00c0\u00c3\3\2"+
-		"\2\2\u00c1\u00bf\3\2\2\2\u00c2\u008b\3\2\2\2\u00c3\u00c6\3\2\2\2\u00c4"+
-		"\u00c2\3\2\2\2\u00c4\u00c5\3\2\2\2\u00c5\u00ca\3\2\2\2\u00c6\u00c4\3\2"+
-		"\2\2\u00c7\u00c9\5\22\n\2\u00c8\u00c7\3\2\2\2\u00c9\u00cc\3\2\2\2\u00ca"+
-		"\u00c8\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb\u00cd\3\2\2\2\u00cc\u00ca\3\2"+
-		"\2\2\u00cd\u00d1\5l\67\2\u00ce\u00d0\5\22\n\2\u00cf\u00ce\3\2\2\2\u00d0"+
-		"\u00d3\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\u00d4\3\2"+
-		"\2\2\u00d3\u00d1\3\2\2\2\u00d4\u00d8\5\30\r\2\u00d5\u00d7\5\22\n\2\u00d6"+
-		"\u00d5\3\2\2\2\u00d7\u00da\3\2\2\2\u00d8\u00d6\3\2\2\2\u00d8\u00d9\3\2"+
-		"\2\2\u00d9\u00db\3\2\2\2\u00da\u00d8\3\2\2\2\u00db\u00dc\5h\65\2\u00dc"+
-		"\u00dd\3\2\2\2\u00dd\u00de\7\2\2\3\u00de\3\3\2\2\2\u00df\u00e1\5\22\n"+
-		"\2\u00e0\u00df\3\2\2\2\u00e1\u00e4\3\2\2\2\u00e2\u00e0\3\2\2\2\u00e2\u00e3"+
-		"\3\2\2\2\u00e3\u00e5\3\2\2\2\u00e4\u00e2\3\2\2\2\u00e5\u00e7\7\13\2\2"+
-		"\u00e6\u00e8\5\22\n\2\u00e7\u00e6\3\2\2\2\u00e8\u00e9\3\2\2\2\u00e9\u00e7"+
-		"\3\2\2\2\u00e9\u00ea\3\2\2\2\u00ea\u00eb\3\2\2\2\u00eb\u00ed\7\64\2\2"+
-		"\u00ec\u00ee\n\2\2\2\u00ed\u00ec\3\2\2\2\u00ee\u00ef\3\2\2\2\u00ef\u00ed"+
-		"\3\2\2\2\u00ef\u00f0\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\u00f2\7\65\2\2"+
-		"\u00f2\5\3\2\2\2\u00f3\u00f5\5\22\n\2\u00f4\u00f3\3\2\2\2\u00f5\u00f8"+
-		"\3\2\2\2\u00f6\u00f4\3\2\2\2\u00f6\u00f7\3\2\2\2\u00f7\u00f9\3\2\2\2\u00f8"+
-		"\u00f6\3\2\2\2\u00f9\u00fb\7\t\2\2\u00fa\u00fc\5\22\n\2\u00fb\u00fa\3"+
-		"\2\2\2\u00fc\u00fd\3\2\2\2\u00fd\u00fb\3\2\2\2\u00fd\u00fe\3\2\2\2\u00fe"+
-		"\u00ff\3\2\2\2\u00ff\u0101\7\64\2\2\u0100\u0102\n\2\2\2\u0101\u0100\3"+
-		"\2\2\2\u0102\u0103\3\2\2\2\u0103\u0101\3\2\2\2\u0103\u0104\3\2\2\2\u0104"+
-		"\u0105\3\2\2\2\u0105\u0106\7\65\2\2\u0106\7\3\2\2\2\u0107\u0109\5\22\n"+
-		"\2\u0108\u0107\3\2\2\2\u0109\u010c\3\2\2\2\u010a\u0108\3\2\2\2\u010a\u010b"+
-		"\3\2\2\2\u010b\u010d\3\2\2\2\u010c\u010a\3\2\2\2\u010d\u010f\7\t\2\2\u010e"+
-		"\u0110\5\22\n\2\u010f\u010e\3\2\2\2\u0110\u0111\3\2\2\2\u0111\u010f\3"+
-		"\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113\3\2\2\2\u0113\u0115\7\20\2\2\u0114"+
-		"\u0116\5\22\n\2\u0115\u0114\3\2\2\2\u0116\u0117\3\2\2\2\u0117\u0115\3"+
-		"\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\3\2\2\2\u0119\u011b\7\63\2\2\u011a"+
-		"\u011c\n\2\2\2\u011b\u011a\3\2\2\2\u011c\u011d\3\2\2\2\u011d\u011b\3\2"+
-		"\2\2\u011d\u011e\3\2\2\2\u011e\u011f\3\2\2\2\u011f\u0120\7\65\2\2\u0120"+
-		"\t\3\2\2\2\u0121\u0123\5\22\n\2\u0122\u0121\3\2\2\2\u0123\u0126\3\2\2"+
-		"\2\u0124\u0122\3\2\2\2\u0124\u0125\3\2\2\2\u0125\u0127\3\2\2\2\u0126\u0124"+
-		"\3\2\2\2\u0127\u0129\7\13\2\2\u0128\u012a\5\22\n\2\u0129\u0128\3\2\2\2"+
-		"\u012a\u012b\3\2\2\2\u012b\u0129\3\2\2\2\u012b\u012c\3\2\2\2\u012c\u012d"+
-		"\3\2\2\2\u012d\u012f\7\'\2\2\u012e\u0130\n\2\2\2\u012f\u012e\3\2\2\2\u0130"+
-		"\u0131\3\2\2\2\u0131\u012f\3\2\2\2\u0131\u0132\3\2\2\2\u0132\u0133\3\2"+
-		"\2\2\u0133\u0134\7\65\2\2\u0134\13\3\2\2\2\u0135\u0137\5\22\n\2\u0136"+
-		"\u0135\3\2\2\2\u0137\u013a\3\2\2\2\u0138\u0136\3\2\2\2\u0138\u0139\3\2"+
-		"\2\2\u0139\u013b\3\2\2\2\u013a\u0138\3\2\2\2\u013b\u013d\7\t\2\2\u013c"+
-		"\u013e\5\22\n\2\u013d\u013c\3\2\2\2\u013e\u013f\3\2\2\2\u013f\u013d\3"+
-		"\2\2\2\u013f\u0140\3\2\2\2\u0140\u0141\3\2\2\2\u0141\u0143\7\62\2\2\u0142"+
-		"\u0144\n\2\2\2\u0143\u0142\3\2\2\2\u0144\u0145\3\2\2\2\u0145\u0143\3\2"+
-		"\2\2\u0145\u0146\3\2\2\2\u0146\u0147\3\2\2\2\u0147\u0148\7\65\2\2\u0148"+
-		"\r\3\2\2\2\u0149\u014b\5\22\n\2\u014a\u0149\3\2\2\2\u014b\u014e\3\2\2"+
-		"\2\u014c\u014a\3\2\2\2\u014c\u014d\3\2\2\2\u014d\u014f\3\2\2\2\u014e\u014c"+
-		"\3\2\2\2\u014f\u0151\7\13\2\2\u0150\u0152\5\22\n\2\u0151\u0150\3\2\2\2"+
-		"\u0152\u0153\3\2\2\2\u0153\u0151\3\2\2\2\u0153\u0154\3\2\2\2\u0154\u0155"+
-		"\3\2\2\2\u0155\u0157\7\b\2\2\u0156\u0158\5\22\n\2\u0157\u0156\3\2\2\2"+
-		"\u0158\u0159\3\2\2\2\u0159\u0157\3\2\2\2\u0159\u015a\3\2\2\2\u015a\u015b"+
-		"\3\2\2\2\u015b\u015d\5t;\2\u015c\u015e\n\2\2\2\u015d\u015c\3\2\2\2\u015e"+
-		"\u015f\3\2\2\2\u015f\u015d\3\2\2\2\u015f\u0160\3\2\2\2\u0160\u0161\3\2"+
-		"\2\2\u0161\u0162\7\65\2\2\u0162\17\3\2\2\2\u0163\u0165\5\22\n\2\u0164"+
-		"\u0163\3\2\2\2\u0165\u0168\3\2\2\2\u0166\u0164\3\2\2\2\u0166\u0167\3\2"+
-		"\2\2\u0167\u0169\3\2\2\2\u0168\u0166\3\2\2\2\u0169\u016b\7\t\2\2\u016a"+
-		"\u016c\5\22\n\2\u016b\u016a\3\2\2\2\u016c\u016d\3\2\2\2\u016d\u016b\3"+
-		"\2\2\2\u016d\u016e\3\2\2\2\u016e\u016f\3\2\2\2\u016f\u0171\7\7\2\2\u0170"+
-		"\u0172\n\2\2\2\u0171\u0170\3\2\2\2\u0172\u0173\3\2\2\2\u0173\u0171\3\2"+
-		"\2\2\u0173\u0174\3\2\2\2\u0174\u0175\3\2\2\2\u0175\u0176\7\65\2\2\u0176"+
-		"\21\3\2\2\2\u0177\u0178\t\3\2\2\u0178\23\3\2\2\2\u0179\u017b\5\22\n\2"+
-		"\u017a\u0179\3\2\2\2\u017b\u017e\3\2\2\2\u017c\u017a\3\2\2\2\u017c\u017d"+
-		"\3\2\2\2\u017d\u017f\3\2\2\2\u017e\u017c\3\2\2\2\u017f\u0180\5\26\f\2"+
-		"\u0180\25\3\2\2\2\u0181\u0183\7\3\2\2\u0182\u0184\5\22\n\2\u0183\u0182"+
-		"\3\2\2\2\u0184\u0185\3\2\2\2\u0185\u0183\3\2\2\2\u0185\u0186\3\2\2\2\u0186"+
-		"\u0187\3\2\2\2\u0187\u0189\7\4\2\2\u0188\u018a\5\22\n\2\u0189\u0188\3"+
-		"\2\2\2\u018a\u018b\3\2\2\2\u018b\u0189\3\2\2\2\u018b\u018c\3\2\2\2\u018c"+
-		"\u018d\3\2\2\2\u018d\u0191\5t;\2\u018e\u0190\5\22\n\2\u018f\u018e\3\2"+
-		"\2\2\u0190\u0193\3\2\2\2\u0191\u018f\3\2\2\2\u0191\u0192\3\2\2\2\u0192"+
-		"\u0194\3\2\2\2\u0193\u0191\3\2\2\2\u0194\u0195\7\65\2\2\u0195\27\3\2\2"+
-		"\2\u0196\u0198\5\22\n\2\u0197\u0196\3\2\2\2\u0198\u019b\3\2\2\2\u0199"+
-		"\u0197\3\2\2\2\u0199\u019a\3\2\2\2\u019a\u019c\3\2\2\2\u019b\u0199\3\2"+
-		"\2\2\u019c\u01a0\7\3\2\2\u019d\u019f\5\22\n\2\u019e\u019d\3\2\2\2\u019f"+
-		"\u01a2\3\2\2\2\u01a0\u019e\3\2\2\2\u01a0\u01a1\3\2\2\2\u01a1\u01a3\3\2"+
-		"\2\2\u01a2\u01a0\3\2\2\2\u01a3\u01a7\7\37\2\2\u01a4\u01a6\5\22\n\2\u01a5"+
-		"\u01a4\3\2\2\2\u01a6\u01a9\3\2\2\2\u01a7\u01a5\3\2\2\2\u01a7\u01a8\3\2"+
-		"\2\2\u01a8\u01aa\3\2\2\2\u01a9\u01a7\3\2\2\2\u01aa\u01ab\7\65\2\2\u01ab"+
-		"\31\3\2\2\2\u01ac\u01ae\5\22\n\2\u01ad\u01ac\3\2\2\2\u01ae\u01b1\3\2\2"+
-		"\2\u01af\u01ad\3\2\2\2\u01af\u01b0\3\2\2\2\u01b0\u01b2\3\2\2\2\u01b1\u01af"+
-		"\3\2\2\2\u01b2\u01b3\5\34\17\2\u01b3\33\3\2\2\2\u01b4\u01b6\7\t\2\2\u01b5"+
-		"\u01b7\5\22\n\2\u01b6\u01b5\3\2\2\2\u01b7\u01b8\3\2\2\2\u01b8\u01b6\3"+
-		"\2\2\2\u01b8\u01b9\3\2\2\2\u01b9\u01ba\3\2\2\2\u01ba\u01bc\7\31\2\2\u01bb"+
-		"\u01bd\5\22\n\2\u01bc\u01bb\3\2\2\2\u01bd\u01be\3\2\2\2\u01be\u01bc\3"+
-		"\2\2\2\u01be\u01bf\3\2\2\2\u01bf\u01c0\3\2\2\2\u01c0\u01c2\7\32\2\2\u01c1"+
-		"\u01c3\5\22\n\2\u01c2\u01c1\3\2\2\2\u01c3\u01c4\3\2\2\2\u01c4\u01c2\3"+
-		"\2\2\2\u01c4\u01c5\3\2\2\2\u01c5\u01c6\3\2\2\2\u01c6\u01c8\7\33\2\2\u01c7"+
-		"\u01c9\n\2\2\2\u01c8\u01c7\3\2\2\2\u01c9\u01ca\3\2\2\2\u01ca\u01c8\3\2"+
-		"\2\2\u01ca\u01cb\3\2\2\2\u01cb\u01cc\3\2\2\2\u01cc\u01cd\7\65\2\2\u01cd"+
-		"\35\3\2\2\2\u01ce\u01d0\5\22\n\2\u01cf\u01ce\3\2\2\2\u01d0\u01d3\3\2\2"+
-		"\2\u01d1\u01cf\3\2\2\2\u01d1\u01d2\3\2\2\2\u01d2\u01d4\3\2\2\2\u01d3\u01d1"+
-		"\3\2\2\2\u01d4\u01d5\5 \21\2\u01d5\37\3\2\2\2\u01d6\u01d8\7\t\2\2\u01d7"+
-		"\u01d9\5\22\n\2\u01d8\u01d7\3\2\2\2\u01d9\u01da\3\2\2\2\u01da\u01d8\3"+
-		"\2\2\2\u01da\u01db\3\2\2\2\u01db\u01dc\3\2\2\2\u01dc\u01de\7$\2\2\u01dd"+
-		"\u01df\n\2\2\2\u01de\u01dd\3\2\2\2\u01df\u01e0\3\2\2\2\u01e0\u01de\3\2"+
-		"\2\2\u01e0\u01e1\3\2\2\2\u01e1\u01e2\3\2\2\2\u01e2\u01e3\7\65\2\2\u01e3"+
-		"!\3\2\2\2\u01e4\u01e6\5\22\n\2\u01e5\u01e4\3\2\2\2\u01e6\u01e9\3\2\2\2"+
-		"\u01e7\u01e5\3\2\2\2\u01e7\u01e8\3\2\2\2\u01e8\u01ea\3\2\2\2\u01e9\u01e7"+
-		"\3\2\2\2\u01ea\u01eb\5$\23\2\u01eb#\3\2\2\2\u01ec\u01ee\7\13\2\2\u01ed"+
-		"\u01ef\5\22\n\2\u01ee\u01ed\3\2\2\2\u01ef\u01f0\3\2\2\2\u01f0\u01ee\3"+
-		"\2\2\2\u01f0\u01f1\3\2\2\2\u01f1\u01f2\3\2\2\2\u01f2\u01f6\7%\2\2\u01f3"+
+		"\3\62\6\62\u0519\n\62\r\62\16\62\u051a\3\62\3\62\3\63\7\63\u0520\n\63"+
+		"\f\63\16\63\u0523\13\63\3\63\3\63\3\64\3\64\6\64\u0529\n\64\r\64\16\64"+
+		"\u052a\3\64\3\64\3\65\7\65\u0530\n\65\f\65\16\65\u0533\13\65\3\65\3\65"+
+		"\6\65\u0537\n\65\r\65\16\65\u0538\3\66\3\66\3\67\7\67\u053e\n\67\f\67"+
+		"\16\67\u0541\13\67\3\67\3\67\6\67\u0545\n\67\r\67\16\67\u0546\3\67\3\67"+
+		"\38\78\u054c\n8\f8\168\u054f\138\38\38\78\u0553\n8\f8\168\u0556\138\3"+
+		"8\38\68\u055a\n8\r8\168\u055b\38\38\39\79\u0561\n9\f9\169\u0564\139\3"+
+		"9\39\79\u0568\n9\f9\169\u056b\139\39\39\79\u056f\n9\f9\169\u0572\139\3"+
+		"9\39\69\u0576\n9\r9\169\u0577\39\39\3:\7:\u057d\n:\f:\16:\u0580\13:\3"+
+		":\3:\7:\u0584\n:\f:\16:\u0587\13:\3:\3:\7:\u058b\n:\f:\16:\u058e\13:\3"+
+		":\6:\u0591\n:\r:\16:\u0592\3:\3:\3;\3;\7;\u0599\n;\f;\16;\u059c\13;\3"+
+		";\3;\5;\u05a0\n;\3;\7;\u05a3\n;\f;\16;\u05a6\13;\3;\3;\7;\u05aa\n;\f;"+
+		"\16;\u05ad\13;\3;\3;\5;\u05b1\n;\3;\7;\u05b4\n;\f;\16;\u05b7\13;\3;\3"+
+		";\3<\3<\3=\3=\3>\3>\3?\3?\3?\3?\3?\5?\u05c6\n?\3@\7@\u05c9\n@\f@\16@\u05cc"+
+		"\13@\3@\3@\7@\u05d0\n@\f@\16@\u05d3\13@\3@\7@\u05d6\n@\f@\16@\u05d9\13"+
+		"@\3@\3@\7@\u05dd\n@\f@\16@\u05e0\13@\7@\u05e2\n@\f@\16@\u05e5\13@\3A\3"+
+		"A\3A\2\2B\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66"+
+		"8:<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\2\t\3\2\65\65\3\2=@\4\2\r"+
+		"\16\21\21\3\2\22\22\5\2\27\30\34\35\65\65\2\3\7\2\20\20\23\23\33\33=?"+
+		"XX\2\u0698\2\u0085\3\2\2\2\4\u00e2\3\2\2\2\6\u00f6\3\2\2\2\b\u010a\3\2"+
+		"\2\2\n\u0124\3\2\2\2\f\u0138\3\2\2\2\16\u014c\3\2\2\2\20\u0166\3\2\2\2"+
+		"\22\u0177\3\2\2\2\24\u017c\3\2\2\2\26\u0181\3\2\2\2\30\u0199\3\2\2\2\32"+
+		"\u01af\3\2\2\2\34\u01b4\3\2\2\2\36\u01d1\3\2\2\2 \u01d6\3\2\2\2\"\u01e7"+
+		"\3\2\2\2$\u01ec\3\2\2\2&\u01fe\3\2\2\2(\u0203\3\2\2\2*\u022a\3\2\2\2,"+
+		"\u022f\3\2\2\2.\u0240\3\2\2\2\60\u0245\3\2\2\2\62\u025c\3\2\2\2\64\u0267"+
+		"\3\2\2\2\66\u027e\3\2\2\28\u0283\3\2\2\2:\u029a\3\2\2\2<\u02d8\3\2\2\2"+
+		">\u02e6\3\2\2\2@\u0302\3\2\2\2B\u033e\3\2\2\2D\u0352\3\2\2\2F\u038b\3"+
+		"\2\2\2H\u03c2\3\2\2\2J\u03f6\3\2\2\2L\u0415\3\2\2\2N\u0439\3\2\2\2P\u044d"+
+		"\3\2\2\2R\u0458\3\2\2\2T\u048d\3\2\2\2V\u0498\3\2\2\2X\u04af\3\2\2\2Z"+
+		"\u04b4\3\2\2\2\\\u04d1\3\2\2\2^\u04dc\3\2\2\2`\u04ff\3\2\2\2b\u050a\3"+
+		"\2\2\2d\u0521\3\2\2\2f\u0526\3\2\2\2h\u0531\3\2\2\2j\u053a\3\2\2\2l\u053f"+
+		"\3\2\2\2n\u054d\3\2\2\2p\u0562\3\2\2\2r\u057e\3\2\2\2t\u05b0\3\2\2\2v"+
+		"\u05ba\3\2\2\2x\u05bc\3\2\2\2z\u05be\3\2\2\2|\u05c5\3\2\2\2~\u05ca\3\2"+
+		"\2\2\u0080\u05e6\3\2\2\2\u0082\u0084\5\22\n\2\u0083\u0082\3\2\2\2\u0084"+
+		"\u0087\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u00c4\3\2"+
+		"\2\2\u0087\u0085\3\2\2\2\u0088\u008a\5\22\n\2\u0089\u0088\3\2\2\2\u008a"+
+		"\u008d\3\2\2\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c\u00ba\3\2"+
+		"\2\2\u008d\u008b\3\2\2\2\u008e\u00bb\5\24\13\2\u008f\u00bb\5\32\16\2\u0090"+
+		"\u00bb\5\36\20\2\u0091\u00bb\5\"\22\2\u0092\u00bb\5&\24\2\u0093\u00bb"+
+		"\5*\26\2\u0094\u00bb\5r:\2\u0095\u00bb\5.\30\2\u0096\u00bb\5\62\32\2\u0097"+
+		"\u00bb\5\66\34\2\u0098\u00bb\5\16\b\2\u0099\u00bb\5<\37\2\u009a\u00bb"+
+		"\5D#\2\u009b\u009d\5\22\n\2\u009c\u009b\3\2\2\2\u009d\u00a0\3\2\2\2\u009e"+
+		"\u009c\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a1\3\2\2\2\u00a0\u009e\3\2"+
+		"\2\2\u00a1\u00a3\5N(\2\u00a2\u009e\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2"+
+		"\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\u00a7\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7"+
+		"\u00bb\5H%\2\u00a8\u00bb\5P)\2\u00a9\u00bb\5T+\2\u00aa\u00bb\5X-\2\u00ab"+
+		"\u00bb\5:\36\2\u00ac\u00bb\5\\/\2\u00ad\u00bb\5`\61\2\u00ae\u00bb\5p9"+
+		"\2\u00af\u00bb\5n8\2\u00b0\u00bb\5\30\r\2\u00b1\u00bb\5L\'\2\u00b2\u00bb"+
+		"\5\n\6\2\u00b3\u00bb\5\f\7\2\u00b4\u00bb\5T+\2\u00b5\u00bb\5\20\t\2\u00b6"+
+		"\u00bb\5\6\4\2\u00b7\u00bb\5\b\5\2\u00b8\u00bb\5\4\3\2\u00b9\u00bb\5d"+
+		"\63\2\u00ba\u008e\3\2\2\2\u00ba\u008f\3\2\2\2\u00ba\u0090\3\2\2\2\u00ba"+
+		"\u0091\3\2\2\2\u00ba\u0092\3\2\2\2\u00ba\u0093\3\2\2\2\u00ba\u0094\3\2"+
+		"\2\2\u00ba\u0095\3\2\2\2\u00ba\u0096\3\2\2\2\u00ba\u0097\3\2\2\2\u00ba"+
+		"\u0098\3\2\2\2\u00ba\u0099\3\2\2\2\u00ba\u009a\3\2\2\2\u00ba\u00a4\3\2"+
+		"\2\2\u00ba\u00a8\3\2\2\2\u00ba\u00a9\3\2\2\2\u00ba\u00aa\3\2\2\2\u00ba"+
+		"\u00ab\3\2\2\2\u00ba\u00ac\3\2\2\2\u00ba\u00ad\3\2\2\2\u00ba\u00ae\3\2"+
+		"\2\2\u00ba\u00af\3\2\2\2\u00ba\u00b0\3\2\2\2\u00ba\u00b1\3\2\2\2\u00ba"+
+		"\u00b2\3\2\2\2\u00ba\u00b3\3\2\2\2\u00ba\u00b4\3\2\2\2\u00ba\u00b5\3\2"+
+		"\2\2\u00ba\u00b6\3\2\2\2\u00ba\u00b7\3\2\2\2\u00ba\u00b8\3\2\2\2\u00ba"+
+		"\u00b9\3\2\2\2\u00bb\u00bf\3\2\2\2\u00bc\u00be\5\22\n\2\u00bd\u00bc\3"+
+		"\2\2\2\u00be\u00c1\3\2\2\2\u00bf\u00bd\3\2\2\2\u00bf\u00c0\3\2\2\2\u00c0"+
+		"\u00c3\3\2\2\2\u00c1\u00bf\3\2\2\2\u00c2\u008b\3\2\2\2\u00c3\u00c6\3\2"+
+		"\2\2\u00c4\u00c2\3\2\2\2\u00c4\u00c5\3\2\2\2\u00c5\u00ca\3\2\2\2\u00c6"+
+		"\u00c4\3\2\2\2\u00c7\u00c9\5\22\n\2\u00c8\u00c7\3\2\2\2\u00c9\u00cc\3"+
+		"\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb\u00cd\3\2\2\2\u00cc"+
+		"\u00ca\3\2\2\2\u00cd\u00d1\5l\67\2\u00ce\u00d0\5\22\n\2\u00cf\u00ce\3"+
+		"\2\2\2\u00d0\u00d3\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2"+
+		"\u00d4\3\2\2\2\u00d3\u00d1\3\2\2\2\u00d4\u00d8\5\30\r\2\u00d5\u00d7\5"+
+		"\22\n\2\u00d6\u00d5\3\2\2\2\u00d7\u00da\3\2\2\2\u00d8\u00d6\3\2\2\2\u00d8"+
+		"\u00d9\3\2\2\2\u00d9\u00db\3\2\2\2\u00da\u00d8\3\2\2\2\u00db\u00dc\5h"+
+		"\65\2\u00dc\u00dd\3\2\2\2\u00dd\u00de\7\2\2\3\u00de\3\3\2\2\2\u00df\u00e1"+
+		"\5\22\n\2\u00e0\u00df\3\2\2\2\u00e1\u00e4\3\2\2\2\u00e2\u00e0\3\2\2\2"+
+		"\u00e2\u00e3\3\2\2\2\u00e3\u00e5\3\2\2\2\u00e4\u00e2\3\2\2\2\u00e5\u00e7"+
+		"\7\13\2\2\u00e6\u00e8\5\22\n\2\u00e7\u00e6\3\2\2\2\u00e8\u00e9\3\2\2\2"+
+		"\u00e9\u00e7\3\2\2\2\u00e9\u00ea\3\2\2\2\u00ea\u00eb\3\2\2\2\u00eb\u00ed"+
+		"\7\64\2\2\u00ec\u00ee\n\2\2\2\u00ed\u00ec\3\2\2\2\u00ee\u00ef\3\2\2\2"+
+		"\u00ef\u00ed\3\2\2\2\u00ef\u00f0\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\u00f2"+
+		"\7\65\2\2\u00f2\5\3\2\2\2\u00f3\u00f5\5\22\n\2\u00f4\u00f3\3\2\2\2\u00f5"+
+		"\u00f8\3\2\2\2\u00f6\u00f4\3\2\2\2\u00f6\u00f7\3\2\2\2\u00f7\u00f9\3\2"+
+		"\2\2\u00f8\u00f6\3\2\2\2\u00f9\u00fb\7\t\2\2\u00fa\u00fc\5\22\n\2\u00fb"+
+		"\u00fa\3\2\2\2\u00fc\u00fd\3\2\2\2\u00fd\u00fb\3\2\2\2\u00fd\u00fe\3\2"+
+		"\2\2\u00fe\u00ff\3\2\2\2\u00ff\u0101\7\64\2\2\u0100\u0102\n\2\2\2\u0101"+
+		"\u0100\3\2\2\2\u0102\u0103\3\2\2\2\u0103\u0101\3\2\2\2\u0103\u0104\3\2"+
+		"\2\2\u0104\u0105\3\2\2\2\u0105\u0106\7\65\2\2\u0106\7\3\2\2\2\u0107\u0109"+
+		"\5\22\n\2\u0108\u0107\3\2\2\2\u0109\u010c\3\2\2\2\u010a\u0108\3\2\2\2"+
+		"\u010a\u010b\3\2\2\2\u010b\u010d\3\2\2\2\u010c\u010a\3\2\2\2\u010d\u010f"+
+		"\7\t\2\2\u010e\u0110\5\22\n\2\u010f\u010e\3\2\2\2\u0110\u0111\3\2\2\2"+
+		"\u0111\u010f\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113\3\2\2\2\u0113\u0115"+
+		"\7\20\2\2\u0114\u0116\5\22\n\2\u0115\u0114\3\2\2\2\u0116\u0117\3\2\2\2"+
+		"\u0117\u0115\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\3\2\2\2\u0119\u011b"+
+		"\7\63\2\2\u011a\u011c\n\2\2\2\u011b\u011a\3\2\2\2\u011c\u011d\3\2\2\2"+
+		"\u011d\u011b\3\2\2\2\u011d\u011e\3\2\2\2\u011e\u011f\3\2\2\2\u011f\u0120"+
+		"\7\65\2\2\u0120\t\3\2\2\2\u0121\u0123\5\22\n\2\u0122\u0121\3\2\2\2\u0123"+
+		"\u0126\3\2\2\2\u0124\u0122\3\2\2\2\u0124\u0125\3\2\2\2\u0125\u0127\3\2"+
+		"\2\2\u0126\u0124\3\2\2\2\u0127\u0129\7\13\2\2\u0128\u012a\5\22\n\2\u0129"+
+		"\u0128\3\2\2\2\u012a\u012b\3\2\2\2\u012b\u0129\3\2\2\2\u012b\u012c\3\2"+
+		"\2\2\u012c\u012d\3\2\2\2\u012d\u012f\7\'\2\2\u012e\u0130\n\2\2\2\u012f"+
+		"\u012e\3\2\2\2\u0130\u0131\3\2\2\2\u0131\u012f\3\2\2\2\u0131\u0132\3\2"+
+		"\2\2\u0132\u0133\3\2\2\2\u0133\u0134\7\65\2\2\u0134\13\3\2\2\2\u0135\u0137"+
+		"\5\22\n\2\u0136\u0135\3\2\2\2\u0137\u013a\3\2\2\2\u0138\u0136\3\2\2\2"+
+		"\u0138\u0139\3\2\2\2\u0139\u013b\3\2\2\2\u013a\u0138\3\2\2\2\u013b\u013d"+
+		"\7\t\2\2\u013c\u013e\5\22\n\2\u013d\u013c\3\2\2\2\u013e\u013f\3\2\2\2"+
+		"\u013f\u013d\3\2\2\2\u013f\u0140\3\2\2\2\u0140\u0141\3\2\2\2\u0141\u0143"+
+		"\7\62\2\2\u0142\u0144\n\2\2\2\u0143\u0142\3\2\2\2\u0144\u0145\3\2\2\2"+
+		"\u0145\u0143\3\2\2\2\u0145\u0146\3\2\2\2\u0146\u0147\3\2\2\2\u0147\u0148"+
+		"\7\65\2\2\u0148\r\3\2\2\2\u0149\u014b\5\22\n\2\u014a\u0149\3\2\2\2\u014b"+
+		"\u014e\3\2\2\2\u014c\u014a\3\2\2\2\u014c\u014d\3\2\2\2\u014d\u014f\3\2"+
+		"\2\2\u014e\u014c\3\2\2\2\u014f\u0151\7\13\2\2\u0150\u0152\5\22\n\2\u0151"+
+		"\u0150\3\2\2\2\u0152\u0153\3\2\2\2\u0153\u0151\3\2\2\2\u0153\u0154\3\2"+
+		"\2\2\u0154\u0155\3\2\2\2\u0155\u0157\7\b\2\2\u0156\u0158\5\22\n\2\u0157"+
+		"\u0156\3\2\2\2\u0158\u0159\3\2\2\2\u0159\u0157\3\2\2\2\u0159\u015a\3\2"+
+		"\2\2\u015a\u015b\3\2\2\2\u015b\u015d\5t;\2\u015c\u015e\n\2\2\2\u015d\u015c"+
+		"\3\2\2\2\u015e\u015f\3\2\2\2\u015f\u015d\3\2\2\2\u015f\u0160\3\2\2\2\u0160"+
+		"\u0161\3\2\2\2\u0161\u0162\7\65\2\2\u0162\17\3\2\2\2\u0163\u0165\5\22"+
+		"\n\2\u0164\u0163\3\2\2\2\u0165\u0168\3\2\2\2\u0166\u0164\3\2\2\2\u0166"+
+		"\u0167\3\2\2\2\u0167\u0169\3\2\2\2\u0168\u0166\3\2\2\2\u0169\u016b\7\t"+
+		"\2\2\u016a\u016c\5\22\n\2\u016b\u016a\3\2\2\2\u016c\u016d\3\2\2\2\u016d"+
+		"\u016b\3\2\2\2\u016d\u016e\3\2\2\2\u016e\u016f\3\2\2\2\u016f\u0171\7\7"+
+		"\2\2\u0170\u0172\n\2\2\2\u0171\u0170\3\2\2\2\u0172\u0173\3\2\2\2\u0173"+
+		"\u0171\3\2\2\2\u0173\u0174\3\2\2\2\u0174\u0175\3\2\2\2\u0175\u0176\7\65"+
+		"\2\2\u0176\21\3\2\2\2\u0177\u0178\t\3\2\2\u0178\23\3\2\2\2\u0179\u017b"+
+		"\5\22\n\2\u017a\u0179\3\2\2\2\u017b\u017e\3\2\2\2\u017c\u017a\3\2\2\2"+
+		"\u017c\u017d\3\2\2\2\u017d\u017f\3\2\2\2\u017e\u017c\3\2\2\2\u017f\u0180"+
+		"\5\26\f\2\u0180\25\3\2\2\2\u0181\u0183\7\3\2\2\u0182\u0184\5\22\n\2\u0183"+
+		"\u0182\3\2\2\2\u0184\u0185\3\2\2\2\u0185\u0183\3\2\2\2\u0185\u0186\3\2"+
+		"\2\2\u0186\u0187\3\2\2\2\u0187\u0189\7\4\2\2\u0188\u018a\5\22\n\2\u0189"+
+		"\u0188\3\2\2\2\u018a\u018b\3\2\2\2\u018b\u0189\3\2\2\2\u018b\u018c\3\2"+
+		"\2\2\u018c\u018d\3\2\2\2\u018d\u0191\5t;\2\u018e\u0190\5\22\n\2\u018f"+
+		"\u018e\3\2\2\2\u0190\u0193\3\2\2\2\u0191\u018f\3\2\2\2\u0191\u0192\3\2"+
+		"\2\2\u0192\u0194\3\2\2\2\u0193\u0191\3\2\2\2\u0194\u0195\7\65\2\2\u0195"+
+		"\27\3\2\2\2\u0196\u0198\5\22\n\2\u0197\u0196\3\2\2\2\u0198\u019b\3\2\2"+
+		"\2\u0199\u0197\3\2\2\2\u0199\u019a\3\2\2\2\u019a\u019c\3\2\2\2\u019b\u0199"+
+		"\3\2\2\2\u019c\u01a0\7\3\2\2\u019d\u019f\5\22\n\2\u019e\u019d\3\2\2\2"+
+		"\u019f\u01a2\3\2\2\2\u01a0\u019e\3\2\2\2\u01a0\u01a1\3\2\2\2\u01a1\u01a3"+
+		"\3\2\2\2\u01a2\u01a0\3\2\2\2\u01a3\u01a7\7\37\2\2\u01a4\u01a6\5\22\n\2"+
+		"\u01a5\u01a4\3\2\2\2\u01a6\u01a9\3\2\2\2\u01a7\u01a5\3\2\2\2\u01a7\u01a8"+
+		"\3\2\2\2\u01a8\u01aa\3\2\2\2\u01a9\u01a7\3\2\2\2\u01aa\u01ab\7\65\2\2"+
+		"\u01ab\31\3\2\2\2\u01ac\u01ae\5\22\n\2\u01ad\u01ac\3\2\2\2\u01ae\u01b1"+
+		"\3\2\2\2\u01af\u01ad\3\2\2\2\u01af\u01b0\3\2\2\2\u01b0\u01b2\3\2\2\2\u01b1"+
+		"\u01af\3\2\2\2\u01b2\u01b3\5\34\17\2\u01b3\33\3\2\2\2\u01b4\u01b6\7\t"+
+		"\2\2\u01b5\u01b7\5\22\n\2\u01b6\u01b5\3\2\2\2\u01b7\u01b8\3\2\2\2\u01b8"+
+		"\u01b6\3\2\2\2\u01b8\u01b9\3\2\2\2\u01b9\u01ba\3\2\2\2\u01ba\u01bc\7\31"+
+		"\2\2\u01bb\u01bd\5\22\n\2\u01bc\u01bb\3\2\2\2\u01bd\u01be\3\2\2\2\u01be"+
+		"\u01bc\3\2\2\2\u01be\u01bf\3\2\2\2\u01bf\u01c0\3\2\2\2\u01c0\u01c2\7\32"+
+		"\2\2\u01c1\u01c3\5\22\n\2\u01c2\u01c1\3\2\2\2\u01c3\u01c4\3\2\2\2\u01c4"+
+		"\u01c2\3\2\2\2\u01c4\u01c5\3\2\2\2\u01c5\u01c6\3\2\2\2\u01c6\u01c8\7\33"+
+		"\2\2\u01c7\u01c9\n\2\2\2\u01c8\u01c7\3\2\2\2\u01c9\u01ca\3\2\2\2\u01ca"+
+		"\u01c8\3\2\2\2\u01ca\u01cb\3\2\2\2\u01cb\u01cc\3\2\2\2\u01cc\u01cd\7\65"+
+		"\2\2\u01cd\35\3\2\2\2\u01ce\u01d0\5\22\n\2\u01cf\u01ce\3\2\2\2\u01d0\u01d3"+
+		"\3\2\2\2\u01d1\u01cf\3\2\2\2\u01d1\u01d2\3\2\2\2\u01d2\u01d4\3\2\2\2\u01d3"+
+		"\u01d1\3\2\2\2\u01d4\u01d5\5 \21\2\u01d5\37\3\2\2\2\u01d6\u01d8\7\t\2"+
+		"\2\u01d7\u01d9\5\22\n\2\u01d8\u01d7\3\2\2\2\u01d9\u01da\3\2\2\2\u01da"+
+		"\u01d8\3\2\2\2\u01da\u01db\3\2\2\2\u01db\u01dc\3\2\2\2\u01dc\u01de\7$"+
+		"\2\2\u01dd\u01df\n\2\2\2\u01de\u01dd\3\2\2\2\u01df\u01e0\3\2\2\2\u01e0"+
+		"\u01de\3\2\2\2\u01e0\u01e1\3\2\2\2\u01e1\u01e2\3\2\2\2\u01e2\u01e3\7\65"+
+		"\2\2\u01e3!\3\2\2\2\u01e4\u01e6\5\22\n\2\u01e5\u01e4\3\2\2\2\u01e6\u01e9"+
+		"\3\2\2\2\u01e7\u01e5\3\2\2\2\u01e7\u01e8\3\2\2\2\u01e8\u01ea\3\2\2\2\u01e9"+
+		"\u01e7\3\2\2\2\u01ea\u01eb\5$\23\2\u01eb#\3\2\2\2\u01ec\u01ee\7\13\2\2"+
+		"\u01ed\u01ef\5\22\n\2\u01ee\u01ed\3\2\2\2\u01ef\u01f0\3\2\2\2\u01f0\u01ee"+
+		"\3\2\2\2\u01f0\u01f1\3\2\2\2\u01f1\u01f2\3\2\2\2\u01f2\u01f6\7%\2\2\u01f3"+
 		"\u01f5\n\2\2\2\u01f4\u01f3\3\2\2\2\u01f5\u01f8\3\2\2\2\u01f6\u01f4\3\2"+
 		"\2\2\u01f6\u01f7\3\2\2\2\u01f7\u01f9\3\2\2\2\u01f8\u01f6\3\2\2\2\u01f9"+
 		"\u01fa\7\65\2\2\u01fa%\3\2\2\2\u01fb\u01fd\5\22\n\2\u01fc\u01fb\3\2\2"+
@@ -8266,94 +8257,91 @@ public class Db2LookParser extends Parser {
 		"\7\t\2\2\u050b\u050d\5\22\n\2\u050c\u050b\3\2\2\2\u050d\u050e\3\2\2\2"+
 		"\u050e\u050c\3\2\2\2\u050e\u050f\3\2\2\2\u050f\u0510\3\2\2\2\u0510\u0512"+
 		"\7+\2\2\u0511\u0513\5\22\n\2\u0512\u0511\3\2\2\2\u0513\u0514\3\2\2\2\u0514"+
-		"\u0512\3\2\2\2\u0514\u0515\3\2\2\2\u0515\u0516\3\2\2\2\u0516\u051a\5t"+
-		";\2\u0517\u0519\13\2\2\2\u0518\u0517\3\2\2\2\u0519\u051c\3\2\2\2\u051a"+
-		"\u051b\3\2\2\2\u051a\u0518\3\2\2\2\u051b\u0520\3\2\2\2\u051c\u051a\3\2"+
-		"\2\2\u051d\u051f\5\22\n\2\u051e\u051d\3\2\2\2\u051f\u0522\3\2\2\2\u0520"+
-		"\u051e\3\2\2\2\u0520\u0521\3\2\2\2\u0521\u0523\3\2\2\2\u0522\u0520\3\2"+
-		"\2\2\u0523\u0524\7-\2\2\u0524\u0525\7\65\2\2\u0525c\3\2\2\2\u0526\u0528"+
-		"\5\22\n\2\u0527\u0526\3\2\2\2\u0528\u052b\3\2\2\2\u0529\u0527\3\2\2\2"+
-		"\u0529\u052a\3\2\2\2\u052a\u052c\3\2\2\2\u052b\u0529\3\2\2\2\u052c\u052d"+
-		"\5f\64\2\u052de\3\2\2\2\u052e\u0530\7\36\2\2\u052f\u0531\n\2\2\2\u0530"+
-		"\u052f\3\2\2\2\u0531\u0532\3\2\2\2\u0532\u0530\3\2\2\2\u0532\u0533\3\2"+
-		"\2\2\u0533\u0534\3\2\2\2\u0534\u0535\7\65\2\2\u0535g\3\2\2\2\u0536\u0538"+
-		"\5\22\n\2\u0537\u0536\3\2\2\2\u0538\u053b\3\2\2\2\u0539\u0537\3\2\2\2"+
-		"\u0539\u053a\3\2\2\2\u053a\u053c\3\2\2\2\u053b\u0539\3\2\2\2\u053c\u053e"+
-		"\7#\2\2\u053d\u053f\n\7\2\2\u053e\u053d\3\2\2\2\u053f\u0540\3\2\2\2\u0540"+
-		"\u053e\3\2\2\2\u0540\u0541\3\2\2\2\u0541i\3\2\2\2\u0542\u0543\5\22\n\2"+
-		"\u0543k\3\2\2\2\u0544\u0546\5\22\n\2\u0545\u0544\3\2\2\2\u0546\u0549\3"+
-		"\2\2\2\u0547\u0545\3\2\2\2\u0547\u0548\3\2\2\2\u0548\u054a\3\2\2\2\u0549"+
-		"\u0547\3\2\2\2\u054a\u054c\7\"\2\2\u054b\u054d\n\2\2\2\u054c\u054b\3\2"+
-		"\2\2\u054d\u054e\3\2\2\2\u054e\u054c\3\2\2\2\u054e\u054f\3\2\2\2\u054f"+
-		"\u0550\3\2\2\2\u0550\u0551\7\65\2\2\u0551m\3\2\2\2\u0552\u0554\5\22\n"+
-		"\2\u0553\u0552\3\2\2\2\u0554\u0557\3\2\2\2\u0555\u0553\3\2\2\2\u0555\u0556"+
-		"\3\2\2\2\u0556\u0558\3\2\2\2\u0557\u0555\3\2\2\2\u0558\u055c\7\t\2\2\u0559"+
-		"\u055b\5j\66\2\u055a\u0559\3\2\2\2\u055b\u055e\3\2\2\2\u055c\u055a\3\2"+
-		"\2\2\u055c\u055d\3\2\2\2\u055d\u055f\3\2\2\2\u055e\u055c\3\2\2\2\u055f"+
-		"\u0561\7!\2\2\u0560\u0562\n\2\2\2\u0561\u0560\3\2\2\2\u0562\u0563\3\2"+
-		"\2\2\u0563\u0561\3\2\2\2\u0563\u0564\3\2\2\2\u0564\u0565\3\2\2\2\u0565"+
-		"\u0566\7\65\2\2\u0566o\3\2\2\2\u0567\u0569\5\22\n\2\u0568\u0567\3\2\2"+
-		"\2\u0569\u056c\3\2\2\2\u056a\u0568\3\2\2\2\u056a\u056b\3\2\2\2\u056b\u056d"+
-		"\3\2\2\2\u056c\u056a\3\2\2\2\u056d\u0571\7\t\2\2\u056e\u0570\5\22\n\2"+
-		"\u056f\u056e\3\2\2\2\u0570\u0573\3\2\2\2\u0571\u056f\3\2\2\2\u0571\u0572"+
-		"\3\2\2\2\u0572\u0574\3\2\2\2\u0573\u0571\3\2\2\2\u0574\u0578\7/\2\2\u0575"+
-		"\u0577\5\22\n\2\u0576\u0575\3\2\2\2\u0577\u057a\3\2\2\2\u0578\u0576\3"+
-		"\2\2\2\u0578\u0579\3\2\2\2\u0579\u057b\3\2\2\2\u057a\u0578\3\2\2\2\u057b"+
-		"\u057d\7\60\2\2\u057c\u057e\n\2\2\2\u057d\u057c\3\2\2\2\u057e\u057f\3"+
-		"\2\2\2\u057f\u057d\3\2\2\2\u057f\u0580\3\2\2\2\u0580\u0581\3\2\2\2\u0581"+
-		"\u0582\7\65\2\2\u0582q\3\2\2\2\u0583\u0585\5\22\n\2\u0584\u0583\3\2\2"+
-		"\2\u0585\u0588\3\2\2\2\u0586\u0584\3\2\2\2\u0586\u0587\3\2\2\2\u0587\u0589"+
-		"\3\2\2\2\u0588\u0586\3\2\2\2\u0589\u058d\7\t\2\2\u058a\u058c\5\22\n\2"+
-		"\u058b\u058a\3\2\2\2\u058c\u058f\3\2\2\2\u058d\u058b\3\2\2\2\u058d\u058e"+
-		"\3\2\2\2\u058e\u0590\3\2\2\2\u058f\u058d\3\2\2\2\u0590\u0594\7\61\2\2"+
-		"\u0591\u0593\5\22\n\2\u0592\u0591\3\2\2\2\u0593\u0596\3\2\2\2\u0594\u0592"+
-		"\3\2\2\2\u0594\u0595\3\2\2\2\u0595\u0598\3\2\2\2\u0596\u0594\3\2\2\2\u0597"+
-		"\u0599\n\2\2\2\u0598\u0597\3\2\2\2\u0599\u059a\3\2\2\2\u059a\u0598\3\2"+
-		"\2\2\u059a\u059b\3\2\2\2\u059b\u059c\3\2\2\2\u059c\u059d\7\65\2\2\u059d"+
-		"s\3\2\2\2\u059e\u05a2\5v<\2\u059f\u05a1\5j\66\2\u05a0\u059f\3\2\2\2\u05a1"+
-		"\u05a4\3\2\2\2\u05a2\u05a0\3\2\2\2\u05a2\u05a3\3\2\2\2\u05a3\u05a5\3\2"+
-		"\2\2\u05a4\u05a2\3\2\2\2\u05a5\u05a6\7G\2\2\u05a6\u05a8\3\2\2\2\u05a7"+
-		"\u059e\3\2\2\2\u05a7\u05a8\3\2\2\2\u05a8\u05ac\3\2\2\2\u05a9\u05ab\5j"+
-		"\66\2\u05aa\u05a9\3\2\2\2\u05ab\u05ae\3\2\2\2\u05ac\u05aa\3\2\2\2\u05ac"+
-		"\u05ad\3\2\2\2\u05ad\u05af\3\2\2\2\u05ae\u05ac\3\2\2\2\u05af\u05b3\5x"+
-		"=\2\u05b0\u05b2\5j\66\2\u05b1\u05b0\3\2\2\2\u05b2\u05b5\3\2\2\2\u05b3"+
-		"\u05b1\3\2\2\2\u05b3\u05b4\3\2\2\2\u05b4\u05b6\3\2\2\2\u05b5\u05b3\3\2"+
-		"\2\2\u05b6\u05b7\7G\2\2\u05b7\u05b9\3\2\2\2\u05b8\u05a7\3\2\2\2\u05b8"+
-		"\u05b9\3\2\2\2\u05b9\u05bd\3\2\2\2\u05ba\u05bc\5j\66\2\u05bb\u05ba\3\2"+
-		"\2\2\u05bc\u05bf\3\2\2\2\u05bd\u05bb\3\2\2\2\u05bd\u05be\3\2\2\2\u05be"+
-		"\u05c0\3\2\2\2\u05bf\u05bd\3\2\2\2\u05c0\u05c1\5z>\2\u05c1u\3\2\2\2\u05c2"+
-		"\u05c3\5|?\2\u05c3w\3\2\2\2\u05c4\u05c5\5|?\2\u05c5y\3\2\2\2\u05c6\u05c7"+
-		"\5|?\2\u05c7{\3\2\2\2\u05c8\u05ce\5\u0080A\2\u05c9\u05ca\7;\2\2\u05ca"+
-		"\u05cb\5~@\2\u05cb\u05cc\7;\2\2\u05cc\u05ce\3\2\2\2\u05cd\u05c8\3\2\2"+
-		"\2\u05cd\u05c9\3\2\2\2\u05ce}\3\2\2\2\u05cf\u05d1\5j\66\2\u05d0\u05cf"+
-		"\3\2\2\2\u05d1\u05d4\3\2\2\2\u05d2\u05d0\3\2\2\2\u05d2\u05d3\3\2\2\2\u05d3"+
-		"\u05d5\3\2\2\2\u05d4\u05d2\3\2\2\2\u05d5\u05d9\5\u0080A\2\u05d6\u05d8"+
-		"\5j\66\2\u05d7\u05d6\3\2\2\2\u05d8\u05db\3\2\2\2\u05d9\u05d7\3\2\2\2\u05d9"+
-		"\u05da\3\2\2\2\u05da\u05eb\3\2\2\2\u05db\u05d9\3\2\2\2\u05dc\u05de\5j"+
-		"\66\2\u05dd\u05dc\3\2\2\2\u05de\u05e1\3\2\2\2\u05df\u05dd\3\2\2\2\u05df"+
-		"\u05e0\3\2\2\2\u05e0\u05e2\3\2\2\2\u05e1\u05df\3\2\2\2\u05e2\u05e6\5\u0080"+
-		"A\2\u05e3\u05e5\5j\66\2\u05e4\u05e3\3\2\2\2\u05e5\u05e8\3\2\2\2\u05e6"+
-		"\u05e4\3\2\2\2\u05e6\u05e7\3\2\2\2\u05e7\u05ea\3\2\2\2\u05e8\u05e6\3\2"+
-		"\2\2\u05e9\u05df\3\2\2\2\u05ea\u05ed\3\2\2\2\u05eb\u05e9\3\2\2\2\u05eb"+
-		"\u05ec\3\2\2\2\u05ec\177\3\2\2\2\u05ed\u05eb\3\2\2\2\u05ee\u05ef\t\b\2"+
-		"\2\u05ef\u0081\3\2\2\2\u00d1\u0085\u008b\u009e\u00a4\u00ba\u00bf\u00c4"+
-		"\u00ca\u00d1\u00d8\u00e2\u00e9\u00ef\u00f6\u00fd\u0103\u010a\u0111\u0117"+
-		"\u011d\u0124\u012b\u0131\u0138\u013f\u0145\u014c\u0153\u0159\u015f\u0166"+
-		"\u016d\u0173\u017c\u0185\u018b\u0191\u0199\u01a0\u01a7\u01af\u01b8\u01be"+
-		"\u01c4\u01ca\u01d1\u01da\u01e0\u01e7\u01f0\u01f6\u01fe\u0207\u020b\u0210"+
-		"\u0217\u021d\u0223\u022a\u0233\u0239\u0240\u0249\u024f\u0256\u025c\u0262"+
-		"\u026b\u0271\u0277\u027e\u0287\u028d\u0293\u029a\u02a0\u02a6\u02ac\u02b3"+
-		"\u02be\u02c4\u02ca\u02ce\u02d2\u02d8\u02df\u02e6\u02ed\u02f3\u02f5\u02fb"+
-		"\u0302\u0309\u030f\u0315\u031b\u0322\u0326\u032b\u0331\u0337\u033e\u0345"+
-		"\u034b\u0352\u0359\u035f\u0365\u036b\u0371\u0377\u037e\u0384\u038b\u0392"+
-		"\u0398\u039e\u03a4\u03aa\u03af\u03b4\u03bb\u03c2\u03c9\u03cf\u03d5\u03db"+
-		"\u03e1\u03e8\u03ef\u03f6\u03fd\u0403\u0409\u040e\u0415\u041c\u041f\u0424"+
-		"\u0426\u042c\u0432\u0439\u0440\u0447\u044d\u0453\u045c\u0462\u0468\u046e"+
-		"\u0474\u0479\u0481\u0487\u048d\u0493\u049c\u04a2\u04a8\u04af\u04b8\u04be"+
-		"\u04c4\u04cb\u04d1\u04d7\u04e0\u04e6\u04ec\u04f1\u04f9\u04ff\u0505\u050e"+
-		"\u0514\u051a\u0520\u0529\u0532\u0539\u0540\u0547\u054e\u0555\u055c\u0563"+
-		"\u056a\u0571\u0578\u057f\u0586\u058d\u0594\u059a\u05a2\u05a7\u05ac\u05b3"+
-		"\u05b8\u05bd\u05cd\u05d2\u05d9\u05df\u05e6\u05eb";
+		"\u0512\3\2\2\2\u0514\u0515\3\2\2\2\u0515\u0516\3\2\2\2\u0516\u0518\5t"+
+		";\2\u0517\u0519\n\2\2\2\u0518\u0517\3\2\2\2\u0519\u051a\3\2\2\2\u051a"+
+		"\u0518\3\2\2\2\u051a\u051b\3\2\2\2\u051b\u051c\3\2\2\2\u051c\u051d\7\65"+
+		"\2\2\u051dc\3\2\2\2\u051e\u0520\5\22\n\2\u051f\u051e\3\2\2\2\u0520\u0523"+
+		"\3\2\2\2\u0521\u051f\3\2\2\2\u0521\u0522\3\2\2\2\u0522\u0524\3\2\2\2\u0523"+
+		"\u0521\3\2\2\2\u0524\u0525\5f\64\2\u0525e\3\2\2\2\u0526\u0528\7\36\2\2"+
+		"\u0527\u0529\n\2\2\2\u0528\u0527\3\2\2\2\u0529\u052a\3\2\2\2\u052a\u0528"+
+		"\3\2\2\2\u052a\u052b\3\2\2\2\u052b\u052c\3\2\2\2\u052c\u052d\7\65\2\2"+
+		"\u052dg\3\2\2\2\u052e\u0530\5\22\n\2\u052f\u052e\3\2\2\2\u0530\u0533\3"+
+		"\2\2\2\u0531\u052f\3\2\2\2\u0531\u0532\3\2\2\2\u0532\u0534\3\2\2\2\u0533"+
+		"\u0531\3\2\2\2\u0534\u0536\7#\2\2\u0535\u0537\n\7\2\2\u0536\u0535\3\2"+
+		"\2\2\u0537\u0538\3\2\2\2\u0538\u0536\3\2\2\2\u0538\u0539\3\2\2\2\u0539"+
+		"i\3\2\2\2\u053a\u053b\5\22\n\2\u053bk\3\2\2\2\u053c\u053e\5\22\n\2\u053d"+
+		"\u053c\3\2\2\2\u053e\u0541\3\2\2\2\u053f\u053d\3\2\2\2\u053f\u0540\3\2"+
+		"\2\2\u0540\u0542\3\2\2\2\u0541\u053f\3\2\2\2\u0542\u0544\7\"\2\2\u0543"+
+		"\u0545\n\2\2\2\u0544\u0543\3\2\2\2\u0545\u0546\3\2\2\2\u0546\u0544\3\2"+
+		"\2\2\u0546\u0547\3\2\2\2\u0547\u0548\3\2\2\2\u0548\u0549\7\65\2\2\u0549"+
+		"m\3\2\2\2\u054a\u054c\5\22\n\2\u054b\u054a\3\2\2\2\u054c\u054f\3\2\2\2"+
+		"\u054d\u054b\3\2\2\2\u054d\u054e\3\2\2\2\u054e\u0550\3\2\2\2\u054f\u054d"+
+		"\3\2\2\2\u0550\u0554\7\t\2\2\u0551\u0553\5j\66\2\u0552\u0551\3\2\2\2\u0553"+
+		"\u0556\3\2\2\2\u0554\u0552\3\2\2\2\u0554\u0555\3\2\2\2\u0555\u0557\3\2"+
+		"\2\2\u0556\u0554\3\2\2\2\u0557\u0559\7!\2\2\u0558\u055a\n\2\2\2\u0559"+
+		"\u0558\3\2\2\2\u055a\u055b\3\2\2\2\u055b\u0559\3\2\2\2\u055b\u055c\3\2"+
+		"\2\2\u055c\u055d\3\2\2\2\u055d\u055e\7\65\2\2\u055eo\3\2\2\2\u055f\u0561"+
+		"\5\22\n\2\u0560\u055f\3\2\2\2\u0561\u0564\3\2\2\2\u0562\u0560\3\2\2\2"+
+		"\u0562\u0563\3\2\2\2\u0563\u0565\3\2\2\2\u0564\u0562\3\2\2\2\u0565\u0569"+
+		"\7\t\2\2\u0566\u0568\5\22\n\2\u0567\u0566\3\2\2\2\u0568\u056b\3\2\2\2"+
+		"\u0569\u0567\3\2\2\2\u0569\u056a\3\2\2\2\u056a\u056c\3\2\2\2\u056b\u0569"+
+		"\3\2\2\2\u056c\u0570\7/\2\2\u056d\u056f\5\22\n\2\u056e\u056d\3\2\2\2\u056f"+
+		"\u0572\3\2\2\2\u0570\u056e\3\2\2\2\u0570\u0571\3\2\2\2\u0571\u0573\3\2"+
+		"\2\2\u0572\u0570\3\2\2\2\u0573\u0575\7\60\2\2\u0574\u0576\n\2\2\2\u0575"+
+		"\u0574\3\2\2\2\u0576\u0577\3\2\2\2\u0577\u0575\3\2\2\2\u0577\u0578\3\2"+
+		"\2\2\u0578\u0579\3\2\2\2\u0579\u057a\7\65\2\2\u057aq\3\2\2\2\u057b\u057d"+
+		"\5\22\n\2\u057c\u057b\3\2\2\2\u057d\u0580\3\2\2\2\u057e\u057c\3\2\2\2"+
+		"\u057e\u057f\3\2\2\2\u057f\u0581\3\2\2\2\u0580\u057e\3\2\2\2\u0581\u0585"+
+		"\7\t\2\2\u0582\u0584\5\22\n\2\u0583\u0582\3\2\2\2\u0584\u0587\3\2\2\2"+
+		"\u0585\u0583\3\2\2\2\u0585\u0586\3\2\2\2\u0586\u0588\3\2\2\2\u0587\u0585"+
+		"\3\2\2\2\u0588\u058c\7\61\2\2\u0589\u058b\5\22\n\2\u058a\u0589\3\2\2\2"+
+		"\u058b\u058e\3\2\2\2\u058c\u058a\3\2\2\2\u058c\u058d\3\2\2\2\u058d\u0590"+
+		"\3\2\2\2\u058e\u058c\3\2\2\2\u058f\u0591\n\2\2\2\u0590\u058f\3\2\2\2\u0591"+
+		"\u0592\3\2\2\2\u0592\u0590\3\2\2\2\u0592\u0593\3\2\2\2\u0593\u0594\3\2"+
+		"\2\2\u0594\u0595\7\65\2\2\u0595s\3\2\2\2\u0596\u059a\5v<\2\u0597\u0599"+
+		"\5j\66\2\u0598\u0597\3\2\2\2\u0599\u059c\3\2\2\2\u059a\u0598\3\2\2\2\u059a"+
+		"\u059b\3\2\2\2\u059b\u059d\3\2\2\2\u059c\u059a\3\2\2\2\u059d\u059e\7G"+
+		"\2\2\u059e\u05a0\3\2\2\2\u059f\u0596\3\2\2\2\u059f\u05a0\3\2\2\2\u05a0"+
+		"\u05a4\3\2\2\2\u05a1\u05a3\5j\66\2\u05a2\u05a1\3\2\2\2\u05a3\u05a6\3\2"+
+		"\2\2\u05a4\u05a2\3\2\2\2\u05a4\u05a5\3\2\2\2\u05a5\u05a7\3\2\2\2\u05a6"+
+		"\u05a4\3\2\2\2\u05a7\u05ab\5x=\2\u05a8\u05aa\5j\66\2\u05a9\u05a8\3\2\2"+
+		"\2\u05aa\u05ad\3\2\2\2\u05ab\u05a9\3\2\2\2\u05ab\u05ac\3\2\2\2\u05ac\u05ae"+
+		"\3\2\2\2\u05ad\u05ab\3\2\2\2\u05ae\u05af\7G\2\2\u05af\u05b1\3\2\2\2\u05b0"+
+		"\u059f\3\2\2\2\u05b0\u05b1\3\2\2\2\u05b1\u05b5\3\2\2\2\u05b2\u05b4\5j"+
+		"\66\2\u05b3\u05b2\3\2\2\2\u05b4\u05b7\3\2\2\2\u05b5\u05b3\3\2\2\2\u05b5"+
+		"\u05b6\3\2\2\2\u05b6\u05b8\3\2\2\2\u05b7\u05b5\3\2\2\2\u05b8\u05b9\5z"+
+		">\2\u05b9u\3\2\2\2\u05ba\u05bb\5|?\2\u05bbw\3\2\2\2\u05bc\u05bd\5|?\2"+
+		"\u05bdy\3\2\2\2\u05be\u05bf\5|?\2\u05bf{\3\2\2\2\u05c0\u05c6\5\u0080A"+
+		"\2\u05c1\u05c2\7;\2\2\u05c2\u05c3\5~@\2\u05c3\u05c4\7;\2\2\u05c4\u05c6"+
+		"\3\2\2\2\u05c5\u05c0\3\2\2\2\u05c5\u05c1\3\2\2\2\u05c6}\3\2\2\2\u05c7"+
+		"\u05c9\5j\66\2\u05c8\u05c7\3\2\2\2\u05c9\u05cc\3\2\2\2\u05ca\u05c8\3\2"+
+		"\2\2\u05ca\u05cb\3\2\2\2\u05cb\u05cd\3\2\2\2\u05cc\u05ca\3\2\2\2\u05cd"+
+		"\u05d1\5\u0080A\2\u05ce\u05d0\5j\66\2\u05cf\u05ce\3\2\2\2\u05d0\u05d3"+
+		"\3\2\2\2\u05d1\u05cf\3\2\2\2\u05d1\u05d2\3\2\2\2\u05d2\u05e3\3\2\2\2\u05d3"+
+		"\u05d1\3\2\2\2\u05d4\u05d6\5j\66\2\u05d5\u05d4\3\2\2\2\u05d6\u05d9\3\2"+
+		"\2\2\u05d7\u05d5\3\2\2\2\u05d7\u05d8\3\2\2\2\u05d8\u05da\3\2\2\2\u05d9"+
+		"\u05d7\3\2\2\2\u05da\u05de\5\u0080A\2\u05db\u05dd\5j\66\2\u05dc\u05db"+
+		"\3\2\2\2\u05dd\u05e0\3\2\2\2\u05de\u05dc\3\2\2\2\u05de\u05df\3\2\2\2\u05df"+
+		"\u05e2\3\2\2\2\u05e0\u05de\3\2\2\2\u05e1\u05d7\3\2\2\2\u05e2\u05e5\3\2"+
+		"\2\2\u05e3\u05e1\3\2\2\2\u05e3\u05e4\3\2\2\2\u05e4\177\3\2\2\2\u05e5\u05e3"+
+		"\3\2\2\2\u05e6\u05e7\t\b\2\2\u05e7\u0081\3\2\2\2\u00d0\u0085\u008b\u009e"+
+		"\u00a4\u00ba\u00bf\u00c4\u00ca\u00d1\u00d8\u00e2\u00e9\u00ef\u00f6\u00fd"+
+		"\u0103\u010a\u0111\u0117\u011d\u0124\u012b\u0131\u0138\u013f\u0145\u014c"+
+		"\u0153\u0159\u015f\u0166\u016d\u0173\u017c\u0185\u018b\u0191\u0199\u01a0"+
+		"\u01a7\u01af\u01b8\u01be\u01c4\u01ca\u01d1\u01da\u01e0\u01e7\u01f0\u01f6"+
+		"\u01fe\u0207\u020b\u0210\u0217\u021d\u0223\u022a\u0233\u0239\u0240\u0249"+
+		"\u024f\u0256\u025c\u0262\u026b\u0271\u0277\u027e\u0287\u028d\u0293\u029a"+
+		"\u02a0\u02a6\u02ac\u02b3\u02be\u02c4\u02ca\u02ce\u02d2\u02d8\u02df\u02e6"+
+		"\u02ed\u02f3\u02f5\u02fb\u0302\u0309\u030f\u0315\u031b\u0322\u0326\u032b"+
+		"\u0331\u0337\u033e\u0345\u034b\u0352\u0359\u035f\u0365\u036b\u0371\u0377"+
+		"\u037e\u0384\u038b\u0392\u0398\u039e\u03a4\u03aa\u03af\u03b4\u03bb\u03c2"+
+		"\u03c9\u03cf\u03d5\u03db\u03e1\u03e8\u03ef\u03f6\u03fd\u0403\u0409\u040e"+
+		"\u0415\u041c\u041f\u0424\u0426\u042c\u0432\u0439\u0440\u0447\u044d\u0453"+
+		"\u045c\u0462\u0468\u046e\u0474\u0479\u0481\u0487\u048d\u0493\u049c\u04a2"+
+		"\u04a8\u04af\u04b8\u04be\u04c4\u04cb\u04d1\u04d7\u04e0\u04e6\u04ec\u04f1"+
+		"\u04f9\u04ff\u0505\u050e\u0514\u051a\u0521\u052a\u0531\u0538\u053f\u0546"+
+		"\u054d\u0554\u055b\u0562\u0569\u0570\u0577\u057e\u0585\u058c\u0592\u059a"+
+		"\u059f\u05a4\u05ab\u05b0\u05b5\u05c5\u05ca\u05d1\u05d7\u05de\u05e3";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

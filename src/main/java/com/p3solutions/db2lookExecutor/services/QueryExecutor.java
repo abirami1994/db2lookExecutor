@@ -17,16 +17,16 @@ public class QueryExecutor {
                 password);
     }
 
-    public void executeQuery(String query, Connection connection, Map<String, String> failedQueryReasonMap) {
+    public void executeQuery(String query, String fullQuery, Connection connection, Map<String, String> failedQueryReasonMap) {
         if(Objects.nonNull(connection)){
             System.out.println("starting to execute");
-            System.out.println(query);
+            System.out.println(query.trim());
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 int i = statement.executeUpdate();
             } catch (Exception e) {
                 if(!(e.getMessage().contains("-601") || e.getMessage().contains("-624") || query.toUpperCase(Locale.ROOT).contains("GRANT"))) {
                     failedQueryReasonMap.put(
-                            query,
+                            "--" + query + "\n \n" + fullQuery,
                             "\"" + (Objects.nonNull(e.getMessage()) ? e.getMessage().replace("\n", " ").replace("\t", " ") : "Some exception occurred") + "\""
                     );
                 }
